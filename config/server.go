@@ -1,6 +1,7 @@
 package config
 
 const (
+	ServerName = "localhost"
 	ServerHost = "0.0.0.0"
 	ServerPort = "8080"
 
