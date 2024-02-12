@@ -1,7 +1,7 @@
 package config
 
 const (
-	ImageDirectory = "/usr/local/share/images/"
+	ImageDirectory = "/usr/local/share/images"
 )
 
 const (
