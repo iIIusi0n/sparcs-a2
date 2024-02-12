@@ -1,5 +1,5 @@
 import React from "react";
-import homeIcon from "../components/icons/Vector (Stroke).svg";
+import homeIcon from "./icons/Vector (Stroke).svg";
 import styled from "styled-components";
 
 const Container = styled.div`
