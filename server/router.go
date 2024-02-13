@@ -70,6 +70,7 @@ func NewRouter() *gin.Engine {
 
 				gathering.GET("/", cGathering.GetGatheringsRouter)
 				gathering.GET("/:id", cGathering.GetGatheringRouter)
+				gathering.GET("/upcoming", cGathering.GetUpcomingGatheringsRouter)
 
 				gathering.POST("/", cGathering.CreateGatheringRouter)
 

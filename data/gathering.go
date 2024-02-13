@@ -30,6 +30,26 @@ func (m *manager) ReadGathering(id int) (*gathering.Gathering, error) {
 	return &g, nil
 }
 
+func (m *manager) ReadGatheringsByUserID(userID int) ([]*gathering.Gathering, error) {
+	rows, err := m.db.Query("SELECT * FROM gatherings WHERE user_id = ?", userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	gatherings := make([]*gathering.Gathering, 0)
+	for rows.Next() {
+		var g gathering.Gathering
+		err := rows.Scan(&g.ID, &g.Title, &g.Latitude, &g.Longitude, &g.DateTime, &g.MaxParticipants, &g.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		gatherings = append(gatherings, &g)
+	}
+
+	return gatherings, nil
+}
+
 func (m *manager) ReadGatherings() ([]*gathering.Gathering, error) {
 	rows, err := m.db.Query("SELECT * FROM gatherings")
 	if err != nil {
@@ -96,6 +116,26 @@ func (m *manager) ReadParticipant(id int) (*gathering.Participant, error) {
 	}
 
 	return &p, nil
+}
+
+func (m *manager) ReadParticipantsByUserID(userID int) ([]*gathering.Participant, error) {
+	rows, err := m.db.Query("SELECT * FROM gathering_participants WHERE user_id = ?", userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	participants := make([]*gathering.Participant, 0)
+	for rows.Next() {
+		var p gathering.Participant
+		err := rows.Scan(&p.ID, &p.GatheringID, &p.UserID, &p.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		participants = append(participants, &p)
+	}
+
+	return participants, nil
 }
 
 func (m *manager) UpdateParticipant(participant *gathering.Participant) error {

@@ -3,7 +3,9 @@ package gathering
 import (
 	"strconv"
 	"strings"
+	"time"
 
+	"api-server/config"
 	"api-server/data"
 	"github.com/gin-gonic/gin"
 )
@@ -232,4 +234,35 @@ func CancelParticipateGatheringRouter(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{"id": id})
+}
+
+func GetUpcomingGatheringsRouter(c *gin.Context) {
+	uid, _ := c.Get("uid")
+
+	participants, err := data.Manager.ReadParticipantsByUserID(uid.(int))
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	upcomingGatherings := make([]*Gathering, 0)
+	for _, participant := range participants {
+		gathering, err := data.Manager.ReadGathering(participant.GatheringID)
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+
+		gatheringDateTime, err := time.Parse(config.MysqlDateTimeLayout, gathering.DateTime)
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+
+		if gatheringDateTime.After(time.Now()) {
+			upcomingGatherings = append(upcomingGatherings, gathering)
+		}
+	}
+
+	c.JSON(200, upcomingGatherings)
 }

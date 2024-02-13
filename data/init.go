@@ -38,6 +38,7 @@ type ManagerModel interface {
 
 	CreateGathering(gathering *gathering.Gathering) (int, error)
 	ReadGathering(id int) (*gathering.Gathering, error)
+	ReadGatheringsByUserID(userID int) ([]*gathering.Gathering, error)
 	ReadGatherings() ([]*gathering.Gathering, error)
 	UpdateGathering(gathering *gathering.Gathering) error
 	DeleteGathering(id int) error
@@ -46,6 +47,7 @@ type ManagerModel interface {
 
 	CreateParticipant(participant *gathering.Participant) (int, error)
 	ReadParticipant(id int) (*gathering.Participant, error)
+	ReadParticipantsByUserID(userID int) ([]*gathering.Participant, error)
 	UpdateParticipant(participant *gathering.Participant) error
 	DeleteParticipant(id int) error
 
