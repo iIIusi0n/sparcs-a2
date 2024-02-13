@@ -57,6 +57,17 @@ func GetPostsRouter(c *gin.Context) {
 		return
 	}
 
+	keyword := c.Query("keyword")
+	if keyword != "" {
+		keywordPosts := make([]*Post, 0)
+		for _, post := range posts {
+			if post.Title == keyword || post.Description == keyword {
+				keywordPosts = append(keywordPosts, post)
+			}
+		}
+		posts = keywordPosts
+	}
+
 	limit := c.Query("limit")
 	if limit != "" {
 		limitNum, err := strconv.Atoi(limit)

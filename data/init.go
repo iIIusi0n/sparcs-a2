@@ -21,6 +21,7 @@ type ManagerModel interface {
 
 	CreatePost(post *post.Post) (int, error)
 	ReadPost(id int) (*post.Post, error)
+	ReadPosts() ([]*post.Post, error)
 	UpdatePost(post *post.Post) error
 	DeletePost(id int) error
 
@@ -37,6 +38,7 @@ type ManagerModel interface {
 
 	CreateGathering(gathering *gathering.Gathering) (int, error)
 	ReadGathering(id int) (*gathering.Gathering, error)
+	ReadGatherings() ([]*gathering.Gathering, error)
 	UpdateGathering(gathering *gathering.Gathering) error
 	DeleteGathering(id int) error
 
@@ -48,6 +50,14 @@ type ManagerModel interface {
 	DeleteParticipant(id int) error
 
 	CountParticipantOnGathering(gatheringID int) (int, error)
+	CheckUserParticipatedGathering(userID, gatheringID int) (bool, error)
+
+	CreateGatheringLocation(location *gathering.Location) (int, error)
+	ReadGatheringLocation(id int) (*gathering.Location, error)
+	UpdateGatheringLocation(location *gathering.Location) error
+	DeleteGatheringLocation(id int) error
+
+	ReadGatheringLocationByGatheringID(gatheringID int) (*gathering.Location, error)
 }
 
 type manager struct {

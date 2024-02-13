@@ -19,3 +19,16 @@ type Participant struct {
 	UserID      int    `json:"user_id"`
 	CreatedAt   string `json:"created_at"`
 }
+
+type Location struct {
+	ID          int    `json:"id"`
+	GatheringID int    `json:"gathering_id"`
+	PostID      int    `json:"post_id"`
+	CreatedAt   string `json:"created_at"`
+}
+
+const (
+	SortOptionLatest = "latest"
+	SortOptionNearby = "nearby"
+	SortOptionLiked  = "liked"
+)

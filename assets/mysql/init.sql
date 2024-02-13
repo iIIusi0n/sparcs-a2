@@ -60,3 +60,14 @@ CREATE TABLE gathering_participants
     FOREIGN KEY (gathering_id) REFERENCES gatherings (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+
+CREATE TABLE gathering_locations
+(
+    id           INT          NOT NULL AUTO_INCREMENT,
+    gathering_id INT          NOT NULL,
+    post_id      INT          NOT NULL,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (gathering_id) REFERENCES gatherings (id),
+    FOREIGN KEY (post_id) REFERENCES posts (id)
+);

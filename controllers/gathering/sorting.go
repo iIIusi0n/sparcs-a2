@@ -1,4 +1,4 @@
-package post
+package gathering
 
 import (
 	"math"
@@ -7,19 +7,31 @@ import (
 	"api-server/data"
 )
 
-// TODO: Implement efficient sorting algorithms
+func getLikesFromGathering(gathering *Gathering) (int, error) {
+	location, err := data.Manager.ReadGatheringLocationByGatheringID(gathering.ID)
+	if err != nil {
+		return 0, err
+	}
 
-func SortPostsByLikes(posts []*Post) []*Post {
-	result := make([]*Post, len(posts))
-	copy(result, posts)
+	likes, err := data.Manager.CountLikeOnPost(location.PostID)
+	if err != nil {
+		return 0, err
+	}
+
+	return likes, nil
+}
+
+func SortGatheringsByLikes(gatherings []*Gathering) []*Gathering {
+	result := make([]*Gathering, len(gatherings))
+	copy(result, gatherings)
 
 	sort.Slice(result, func(i, j int) bool {
-		iLikes, err := data.Manager.CountLikeOnPost(result[i].ID)
+		iLikes, err := getLikesFromGathering(result[i])
 		if err != nil {
 			return false
 		}
 
-		jLikes, err := data.Manager.CountLikeOnPost(result[j].ID)
+		jLikes, err := getLikesFromGathering(result[j])
 		if err != nil {
 			return false
 		}
@@ -47,9 +59,9 @@ func distance(lat1, lon1, lat2, lon2 float64) float64 {
 	return R * e
 }
 
-func SortPostsByDistance(posts []*Post, latitude, longitude float64) []*Post {
-	result := make([]*Post, len(posts))
-	copy(result, posts)
+func SortGatheringsByDistance(gatherings []*Gathering, latitude, longitude float64) []*Gathering {
+	result := make([]*Gathering, len(gatherings))
+	copy(result, gatherings)
 
 	sort.Slice(result, func(i, j int) bool {
 		iDistance := distance(latitude, longitude, result[i].Latitude, result[i].Longitude)

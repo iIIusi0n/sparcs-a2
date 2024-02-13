@@ -5,6 +5,7 @@ import (
 	"api-server/middlewares"
 	"github.com/gin-gonic/gin"
 
+	cGathering "api-server/controllers/gathering"
 	cImage "api-server/controllers/image"
 	cPost "api-server/controllers/post"
 	cUser "api-server/controllers/user"
@@ -61,6 +62,26 @@ func NewRouter() *gin.Engine {
 				post.POST("/:id/like", cPost.LikePostRouter)
 
 				post.DELETE("/:id/like", cPost.UnlikePostRouter)
+			}
+
+			gathering := v1.Group("/gathering")
+			{
+				gathering.Use(middlewares.JwtAuthMiddleware)
+
+				gathering.GET("/", cGathering.GetGatheringsRouter)
+				gathering.GET("/:id", cGathering.GetGatheringRouter)
+
+				gathering.POST("/", cGathering.CreateGatheringRouter)
+
+				gathering.PATCH("/:id", cGathering.UpdateGatheringRouter)
+
+				post.DELETE("/:id", cGathering.DeleteGatheringRouter)
+
+				gathering.GET("/:id/participant", cGathering.GetGatheringParticipantsRouter)
+
+				gathering.POST("/:id/participant", cGathering.ParticipateGatheringRouter)
+
+				gathering.DELETE("/:id/participant", cGathering.CancelParticipateGatheringRouter)
 			}
 		}
 	}
