@@ -14,9 +14,9 @@ func NewRouter() *gin.Engine {
 	{
 		v1 := api.Group("/v1")
 		{
-			user := v1.Group("/user")
+			user := v1.Group("/debug") // TODO: Remove this
 			{
-				user.GET("/token/:id/:name", cUser.TemporaryTokenRouter) // TODO: Replace this endpoint with a more secure one
+				user.GET("/token/:id/:name", cUser.TemporaryTokenRouter)
 			}
 
 			image := v1.Group("/image")
@@ -25,6 +25,7 @@ func NewRouter() *gin.Engine {
 
 				image.GET("/:id", cImage.GetImageRouter)
 				image.POST("/", cImage.UploadImageRouter)
+				image.DELETE("/:id", cImage.DeleteImageRouter)
 			}
 		}
 	}

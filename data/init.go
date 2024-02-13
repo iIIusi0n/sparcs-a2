@@ -6,11 +6,43 @@ import (
 	"log"
 
 	"api-server/config"
+	"api-server/controllers/gathering"
+	"api-server/controllers/post"
+	"api-server/controllers/user"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type ManagerModel interface{}
+type ManagerModel interface {
+	CreateUser(user *user.User) error
+	ReadUser(id int) (*user.User, error)
+	UpdateUser(user *user.User) error
+	DeleteUser(id int) error
+
+	CreatePost(post *post.Post) error
+	ReadPost(id int) (*post.Post, error)
+	UpdatePost(post *post.Post) error
+	DeletePost(id int) error
+
+	CreateLike(like *post.Like) error
+	ReadLike(id int) (*post.Like, error)
+	UpdateLike(like *post.Like) error
+	DeleteLike(id int) error
+
+	CountLikeOnPost(postID int) (int, error)
+
+	CreateGathering(gathering *gathering.Gathering) error
+	ReadGathering(id int) (*gathering.Gathering, error)
+	UpdateGathering(gathering *gathering.Gathering) error
+	DeleteGathering(id int) error
+
+	CreateParticipant(participant *gathering.Participant) error
+	ReadParticipant(id int) (*gathering.Participant, error)
+	UpdateParticipant(participant *gathering.Participant) error
+	DeleteParticipant(id int) error
+
+	CountParticipantOnGathering(gatheringID int) (int, error)
+}
 
 type manager struct {
 	db *sql.DB

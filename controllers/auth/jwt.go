@@ -8,13 +8,13 @@ import (
 )
 
 type TokenClaims struct {
-	UserID string `json:"uid"`
+	UserID int    `json:"uid"`
 	Name   string `json:"name"`
 
 	jwt.StandardClaims
 }
 
-func BuildNewToken(userID, name string) (string, error) {
+func BuildNewToken(userID int, name string) (string, error) {
 	claims := TokenClaims{
 		UserID: userID,
 		Name:   name,
