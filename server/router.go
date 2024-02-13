@@ -77,8 +77,6 @@ func NewRouter() *gin.Engine {
 
 				gathering.PATCH("/:id", cGathering.UpdateGatheringRouter)
 
-				post.DELETE("/:id", cGathering.DeleteGatheringRouter)
-
 				gathering.GET("/:id/participant", cGathering.GetGatheringParticipantsRouter)
 
 				gathering.POST("/:id/participant", cGathering.ParticipateGatheringRouter)

@@ -1,10 +1,14 @@
 package data
 
-import (
-	"api-server/controllers/user"
-)
+type User struct {
+	ID             int    `json:"id"`
+	Username       string `json:"username"`
+	Name           string `json:"name"`
+	ProfilePicture string `json:"profile_picture"`
+	CreatedAt      string `json:"created_at"`
+}
 
-func (m *manager) CreateUser(user *user.User) (int, error) {
+func (m *manager) CreateUser(user *User) (int, error) {
 	result, err := m.db.Exec("INSERT INTO users (username, name, profile_picture) VALUES (?, ?, ?)", user.Username, user.Name, user.ProfilePicture)
 	if err != nil {
 		return 0, err
@@ -18,10 +22,10 @@ func (m *manager) CreateUser(user *user.User) (int, error) {
 	return int(id), nil
 }
 
-func (m *manager) ReadUser(id int) (*user.User, error) {
+func (m *manager) ReadUser(id int) (*User, error) {
 	row := m.db.QueryRow("SELECT * FROM users WHERE id = ?", id)
 
-	var u user.User
+	var u User
 	err := row.Scan(&u.ID, &u.Username, &u.Name, &u.ProfilePicture, &u.CreatedAt)
 	if err != nil {
 		return nil, err
@@ -30,7 +34,7 @@ func (m *manager) ReadUser(id int) (*user.User, error) {
 	return &u, nil
 }
 
-func (m *manager) UpdateUser(user *user.User) error {
+func (m *manager) UpdateUser(user *User) error {
 	_, err := m.db.Exec("UPDATE users SET username = ?, name = ?, profile_picture = ? WHERE id = ?", user.Username, user.Name, user.ProfilePicture, user.ID)
 	return err
 }

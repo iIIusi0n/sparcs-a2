@@ -9,8 +9,8 @@ import (
 
 // TODO: Implement efficient sorting algorithms
 
-func SortPostsByLikes(posts []*Post) []*Post {
-	result := make([]*Post, len(posts))
+func SortPostsByLikes(posts []*data.Post) []*data.Post {
+	result := make([]*data.Post, len(posts))
 	copy(result, posts)
 
 	sort.Slice(result, func(i, j int) bool {
@@ -47,8 +47,8 @@ func distance(lat1, lon1, lat2, lon2 float64) float64 {
 	return R * e
 }
 
-func SortPostsByDistance(posts []*Post, latitude, longitude float64) []*Post {
-	result := make([]*Post, len(posts))
+func SortPostsByDistance(posts []*data.Post, latitude, longitude float64) []*data.Post {
+	result := make([]*data.Post, len(posts))
 	copy(result, posts)
 
 	sort.Slice(result, func(i, j int) bool {

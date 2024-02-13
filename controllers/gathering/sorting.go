@@ -7,7 +7,7 @@ import (
 	"api-server/data"
 )
 
-func getLikesFromGathering(gathering *Gathering) (int, error) {
+func getLikesFromGathering(gathering *data.Gathering) (int, error) {
 	location, err := data.Manager.ReadGatheringLocationByGatheringID(gathering.ID)
 	if err != nil {
 		return 0, err
@@ -21,8 +21,8 @@ func getLikesFromGathering(gathering *Gathering) (int, error) {
 	return likes, nil
 }
 
-func SortGatheringsByLikes(gatherings []*Gathering) []*Gathering {
-	result := make([]*Gathering, len(gatherings))
+func SortGatheringsByLikes(gatherings []*data.Gathering) []*data.Gathering {
+	result := make([]*data.Gathering, len(gatherings))
 	copy(result, gatherings)
 
 	sort.Slice(result, func(i, j int) bool {
@@ -59,8 +59,8 @@ func distance(lat1, lon1, lat2, lon2 float64) float64 {
 	return R * e
 }
 
-func SortGatheringsByDistance(gatherings []*Gathering, latitude, longitude float64) []*Gathering {
-	result := make([]*Gathering, len(gatherings))
+func SortGatheringsByDistance(gatherings []*data.Gathering, latitude, longitude float64) []*data.Gathering {
+	result := make([]*data.Gathering, len(gatherings))
 	copy(result, gatherings)
 
 	sort.Slice(result, func(i, j int) bool {

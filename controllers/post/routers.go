@@ -59,7 +59,7 @@ func GetPostsRouter(c *gin.Context) {
 
 	keyword := c.Query("keyword")
 	if keyword != "" {
-		keywordPosts := make([]*Post, 0)
+		keywordPosts := make([]*data.Post, 0)
 		for _, post := range posts {
 			if post.Title == keyword || post.Description == keyword {
 				keywordPosts = append(keywordPosts, post)
@@ -85,7 +85,7 @@ func GetPostsRouter(c *gin.Context) {
 }
 
 func CreatePostRouter(c *gin.Context) {
-	var post Post
+	var post data.Post
 	if err := c.ShouldBindJSON(&post); err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -105,7 +105,7 @@ func CreatePostRouter(c *gin.Context) {
 }
 
 func UpdatePostRouter(c *gin.Context) {
-	var post Post
+	var post data.Post
 	if err := c.ShouldBindJSON(&post); err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -238,7 +238,7 @@ func LikePostRouter(c *gin.Context) {
 		return
 	}
 
-	like := Like{
+	like := data.Like{
 		UserID: uid.(int),
 		PostID: idNum,
 	}
@@ -274,7 +274,7 @@ func UnlikePostRouter(c *gin.Context) {
 		return
 	}
 
-	like := Like{
+	like := data.Like{
 		UserID: uid.(int),
 		PostID: idNum,
 	}

@@ -6,61 +6,57 @@ import (
 	"log"
 
 	"api-server/config"
-	"api-server/controllers/gathering"
-	"api-server/controllers/post"
-	"api-server/controllers/user"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
 type ManagerModel interface {
-	CreateUser(user *user.User) (int, error)
-	ReadUser(id int) (*user.User, error)
-	UpdateUser(user *user.User) error
+	CreateUser(user *User) (int, error)
+	ReadUser(id int) (*User, error)
+	UpdateUser(user *User) error
 	DeleteUser(id int) error
 
-	CreatePost(post *post.Post) (int, error)
-	ReadPost(id int) (*post.Post, error)
-	ReadPosts() ([]*post.Post, error)
-	UpdatePost(post *post.Post) error
+	CreatePost(post *Post) (int, error)
+	ReadPost(id int) (*Post, error)
+	ReadPosts() ([]*Post, error)
+	UpdatePost(post *Post) error
 	DeletePost(id int) error
 
-	ReadPostsByUserID(userID int) ([]*post.Post, error)
+	ReadPostsByUserID(userID int) ([]*Post, error)
 	CountPostsOnUser(userID int) (int, error)
 
-	CreateLike(like *post.Like) (int, error)
-	ReadLike(id int) (*post.Like, error)
-	UpdateLike(like *post.Like) error
+	CreateLike(like *Like) (int, error)
+	ReadLike(id int) (*Like, error)
+	UpdateLike(like *Like) error
 	DeleteLike(id int) error
 
 	CountLikeOnPost(postID int) (int, error)
 	CheckUserLikedPost(userID, postID int) (bool, error)
 
-	CreateGathering(gathering *gathering.Gathering) (int, error)
-	ReadGathering(id int) (*gathering.Gathering, error)
-	ReadGatheringsByUserID(userID int) ([]*gathering.Gathering, error)
-	ReadGatherings() ([]*gathering.Gathering, error)
-	UpdateGathering(gathering *gathering.Gathering) error
+	CreateGathering(gathering *Gathering) (int, error)
+	ReadGathering(id int) (*Gathering, error)
+	ReadGatheringsByUserID(userID int) ([]*Gathering, error)
+	ReadGatherings() ([]*Gathering, error)
+	UpdateGathering(gathering *Gathering) error
 	DeleteGathering(id int) error
 
 	CountGatheringOnUser(userID int) (int, error)
 
-	CreateParticipant(participant *gathering.Participant) (int, error)
-	ReadParticipant(id int) (*gathering.Participant, error)
-	ReadParticipantsByUserID(userID int) ([]*gathering.Participant, error)
-	ReadParticipantsByGatheringID(gatheringID int) ([]*gathering.Participant, error)
-	UpdateParticipant(participant *gathering.Participant) error
+	CreateParticipant(participant *Participant) (int, error)
+	ReadParticipant(id int) (*Participant, error)
+	ReadParticipantsByUserID(userID int) ([]*Participant, error)
+	ReadParticipantsByGatheringID(gatheringID int) ([]*Participant, error)
+	UpdateParticipant(participant *Participant) error
 	DeleteParticipant(id int) error
 
 	CountParticipantOnGathering(gatheringID int) (int, error)
 	CheckUserParticipatedGathering(userID, gatheringID int) (bool, error)
 
-	CreateGatheringLocation(location *gathering.Location) (int, error)
-	ReadGatheringLocation(id int) (*gathering.Location, error)
-	UpdateGatheringLocation(location *gathering.Location) error
+	CreateGatheringLocation(location *Location) (int, error)
+	ReadGatheringLocation(id int) (*Location, error)
+	UpdateGatheringLocation(location *Location) error
 	DeleteGatheringLocation(id int) error
 
-	ReadGatheringLocationByGatheringID(gatheringID int) (*gathering.Location, error)
+	ReadGatheringLocationByGatheringID(gatheringID int) (*Location, error)
 }
 
 type manager struct {

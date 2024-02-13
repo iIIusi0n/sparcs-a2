@@ -91,7 +91,7 @@ func GetStatsRouter(c *gin.Context) {
 func UpdateUserRouter(c *gin.Context) {
 	uid, _ := c.Get("uid")
 
-	var u User
+	var u data.User
 	if err := c.ShouldBindJSON(&u); err != nil {
 		c.JSON(400, gin.H{"error": "Invalid request"})
 		return

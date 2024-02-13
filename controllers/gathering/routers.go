@@ -49,7 +49,7 @@ func GetGatheringsRouter(c *gin.Context) {
 
 	keyword := c.Query("keyword")
 	if keyword != "" {
-		keywordGatherings := make([]*Gathering, 0)
+		keywordGatherings := make([]*data.Gathering, 0)
 		for _, gathering := range gatherings {
 			if strings.Contains(gathering.Title, keyword) {
 				keywordGatherings = append(keywordGatherings, gathering)
@@ -74,7 +74,7 @@ func GetGatheringsRouter(c *gin.Context) {
 }
 
 func CreateGatheringRouter(c *gin.Context) {
-	var gathering Gathering
+	var gathering data.Gathering
 	err := c.BindJSON(&gathering)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -87,7 +87,7 @@ func CreateGatheringRouter(c *gin.Context) {
 		return
 	}
 
-	participant := Participant{
+	participant := data.Participant{
 		UserID:      gathering.UserID,
 		GatheringID: gathering.ID,
 	}
@@ -101,7 +101,7 @@ func CreateGatheringRouter(c *gin.Context) {
 }
 
 func UpdateGatheringRouter(c *gin.Context) {
-	var gathering Gathering
+	var gathering data.Gathering
 	err := c.BindJSON(&gathering)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
@@ -191,7 +191,7 @@ func ParticipateGatheringRouter(c *gin.Context) {
 		return
 	}
 
-	participant := Participant{
+	participant := data.Participant{
 		UserID:      uid.(int),
 		GatheringID: idNum,
 	}
@@ -227,7 +227,7 @@ func CancelParticipateGatheringRouter(c *gin.Context) {
 		return
 	}
 
-	participant := Participant{
+	participant := data.Participant{
 		UserID:      uid.(int),
 		GatheringID: idNum,
 	}
@@ -250,7 +250,7 @@ func GetUpcomingGatheringsRouter(c *gin.Context) {
 		return
 	}
 
-	upcomingGatherings := make([]*Gathering, 0)
+	upcomingGatherings := make([]*data.Gathering, 0)
 	for _, participant := range participants {
 		gathering, err := data.Manager.ReadGathering(participant.GatheringID)
 		if err != nil {
