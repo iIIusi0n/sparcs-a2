@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	cImage "api-server/controllers/image"
+	cPost "api-server/controllers/post"
 	cUser "api-server/controllers/user"
 )
 
@@ -38,6 +39,14 @@ func NewRouter() *gin.Engine {
 				user.GET("/stats", cUser.GetStatsRouter)
 
 				user.PATCH("/", cUser.UpdateUserRouter)
+			}
+
+			post := v1.Group("/post")
+			{
+				post.Use(middlewares.JwtAuthMiddleware)
+
+				post.GET("/", cPost.GetPostsRouter)
+				post.GET("/:id", cPost.GetPostRouter)
 			}
 		}
 	}

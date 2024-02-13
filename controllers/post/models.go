@@ -18,3 +18,9 @@ type Like struct {
 	PostID    int    `json:"post_id"`
 	CreatedAt string `json:"created_at"`
 }
+
+const (
+	SortOptionLatest = "latest"
+	SortOptionNearby = "nearby"
+	SortOptionLiked  = "liked"
+)
