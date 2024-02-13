@@ -186,3 +186,93 @@ func DeletePostRouter(c *gin.Context) {
 
 	c.JSON(200, gin.H{"id": idNum})
 }
+
+func GetPostLikesRouter(c *gin.Context) {
+	id := c.Param("id")
+
+	idNum, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid id"})
+		return
+	}
+
+	count, err := data.Manager.CountLikeOnPost(idNum)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"count": count})
+}
+
+func LikePostRouter(c *gin.Context) {
+	id := c.Param("id")
+
+	idNum, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid id"})
+		return
+	}
+
+	uid, _ := c.Get("uid")
+
+	liked, err := data.Manager.CheckUserLikedPost(uid.(int), idNum)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	if liked {
+		c.JSON(400, gin.H{"error": "User already liked this post"})
+		return
+	}
+
+	like := Like{
+		UserID: uid.(int),
+		PostID: idNum,
+	}
+
+	_, err = data.Manager.CreateLike(&like)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"id": idNum})
+}
+
+func UnlikePostRouter(c *gin.Context) {
+	id := c.Param("id")
+
+	idNum, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid id"})
+		return
+	}
+
+	uid, _ := c.Get("uid")
+
+	liked, err := data.Manager.CheckUserLikedPost(uid.(int), idNum)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	if !liked {
+		c.JSON(400, gin.H{"error": "User has not liked this post"})
+		return
+	}
+
+	like := Like{
+		UserID: uid.(int),
+		PostID: idNum,
+	}
+
+	err = data.Manager.DeleteLike(like.ID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"id": idNum})
+}

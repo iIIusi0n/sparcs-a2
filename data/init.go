@@ -33,6 +33,7 @@ type ManagerModel interface {
 	DeleteLike(id int) error
 
 	CountLikeOnPost(postID int) (int, error)
+	CheckUserLikedPost(userID, postID int) (bool, error)
 
 	CreateGathering(gathering *gathering.Gathering) (int, error)
 	ReadGathering(id int) (*gathering.Gathering, error)

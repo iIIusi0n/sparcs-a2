@@ -55,6 +55,12 @@ func NewRouter() *gin.Engine {
 				post.PATCH("/:id", cPost.UpdatePostRouter)
 
 				post.DELETE("/:id", cPost.DeletePostRouter)
+
+				post.GET("/:id/like", cPost.GetPostLikesRouter)
+
+				post.POST("/:id/like", cPost.LikePostRouter)
+
+				post.DELETE("/:id/like", cPost.UnlikePostRouter)
 			}
 		}
 	}

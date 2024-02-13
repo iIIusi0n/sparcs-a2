@@ -88,6 +88,18 @@ func (m *manager) CountLikeOnPost(postID int) (int, error) {
 	return count, nil
 }
 
+func (m *manager) CheckUserLikedPost(userID, postID int) (bool, error) {
+	row := m.db.QueryRow("SELECT COUNT(*) FROM likes WHERE user_id = ? AND post_id = ?", userID, postID)
+
+	var count int
+	err := row.Scan(&count)
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
+}
+
 func (m *manager) ReadPostsByUserID(userID int) ([]*post.Post, error) {
 	rows, err := m.db.Query("SELECT * FROM posts WHERE user_id = ?", userID)
 	if err != nil {
