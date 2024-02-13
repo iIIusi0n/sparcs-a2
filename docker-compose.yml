@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  # MySQL
+  db:
+    image: mysql:8.0
+    volumes:
+      - ./assets/mysql:/docker-entrypoint-initdb.d
+
+  # Golang API server
+  api-server:
+    build: .
+    volumes:
+      - .:/app
+    command:
+      - /bin/bash
+      - -c
+      - ./api-server
+
+  # React builder
+  react:
+    image: node:14
+    volumes:
+      - ./web:/app
+    working_dir: /app
+    command: /bin/bash -c "npm install && npm run build"
+
+  # Caddy reverse proxy
+  caddy:
+    image: caddy
+    volumes:
+      - ./web/build:/usr/share/caddy/assets
+      - ./assets/caddy/Caddyfile:/etc/caddy/Caddyfile
+    environment:
+      API_SERVER_HOST: api-server
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - react

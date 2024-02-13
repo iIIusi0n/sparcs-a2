@@ -1,0 +1,4 @@
+{$SERVER_DOMAIN} {
+	reverse_proxy /api/* {$API_SERVER_HOST}:8080
+	file_server /usr/share/caddy/assets
+}
