@@ -27,7 +27,9 @@ func NewRouter() *gin.Engine {
 			image := v1.Group("/image")
 			{
 				image.GET("/:id", cImage.GetImageRouter)
+
 				image.POST("/", cImage.UploadImageRouter)
+
 				image.DELETE("/:id", cImage.DeleteImageRouter)
 			}
 
@@ -47,6 +49,12 @@ func NewRouter() *gin.Engine {
 
 				post.GET("/", cPost.GetPostsRouter)
 				post.GET("/:id", cPost.GetPostRouter)
+
+				post.POST("/", cPost.CreatePostRouter)
+
+				post.PATCH("/:id", cPost.UpdatePostRouter)
+
+				post.DELETE("/:id", cPost.DeletePostRouter)
 			}
 		}
 	}
