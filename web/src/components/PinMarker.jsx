@@ -24,11 +24,18 @@ const AddPin = () => {
         {/* 아이폰 화면 크기보다 큰 화면에 대한 스타일 */}
         <div>
           <div style={{ position: "absolute", left: "245px", top: "105px" }}>
-            <img
-              src={pinMarkerIconBig}
-              alt="Pin Marker Icon Big"
-              style={{ width: "auto", height: "10px" }}
-            />
+            <button
+              style={{
+                background: "white",
+                border: "white",
+              }}
+            >
+              <img
+                src={pinMarkerIconBig}
+                alt="Pin Marker Icon Big"
+                style={{ width: "auto", height: "10px" }}
+              />
+            </button>
           </div>
         </div>
       </MediaQuery>

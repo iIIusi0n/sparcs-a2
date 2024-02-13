@@ -46,7 +46,15 @@ const Header = () => {
             <option value={map_index[4]}>{map_index[4]}</option>
           </select>
           <search style={{ position: "absolute", top: "15px", right: "45px" }}>
-            <FaSearch size={30} color="FF772A" />
+            <button
+              style={{
+                background: "white",
+                border: "white",
+                margin: "0px",
+              }}
+            >
+              <FaSearch size={30} color="FF772A" />
+            </button>
           </search>
           <alert
             style={{
@@ -55,7 +63,15 @@ const Header = () => {
               right: "10px",
             }}
           >
-            <HiOutlineBellAlert size={30} color="FF772A" />
+            <button
+              style={{
+                background: "white",
+                border: "white",
+                margin: "0px",
+              }}
+            >
+              <HiOutlineBellAlert size={30} color="FF772A" />
+            </button>
           </alert>
         </div>
       </MediaQuery>
@@ -84,11 +100,27 @@ const Header = () => {
             <option value={map_index[3]}>{map_index[3]}</option>
             <option value={map_index[4]}>{map_index[4]}</option>
           </select>
-          <search style={{ position: "relative", top: "15px", left: "280px" }}>
-            <FaSearch size={15} color="FF772A" />
+          <search style={{ position: "relative", top: "15px", left: "265px" }}>
+            <button
+              style={{
+                background: "white",
+                border: "white",
+                margin: "0px",
+              }}
+            >
+              <FaSearch size={15} color="FF772A" />
+            </button>
           </search>
-          <alert style={{ position: "relative", top: "15px", left: "285px" }}>
-            <HiOutlineBellAlert size={15} color="FF772A" />
+          <alert style={{ position: "relative", top: "15px", left: "260px" }}>
+            <button
+              style={{
+                background: "white",
+                border: "white",
+                margin: "0px",
+              }}
+            >
+              <HiOutlineBellAlert size={15} color="FF772A" />
+            </button>
           </alert>
         </div>
       </MediaQuery>
