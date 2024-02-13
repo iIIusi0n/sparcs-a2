@@ -5,7 +5,7 @@ import (
 )
 
 func (m *manager) CreateGathering(gathering *gathering.Gathering) (int, error) {
-	result, err := m.db.Exec("INSERT INTO gatherings (user_id, title, latitude, longitude, date_time, max_participants) VALUES (?, ?, ?, ?, ?, ?)", gathering.UserID, gathering.Title, gathering.Latitude, gathering.Longitude, gathering.DateTime, gathering.MaxParticipants)
+	result, err := m.db.Exec("INSERT INTO gatherings (user_id, title, latitude, longitude, date_time, duration_in_hours, max_participants, thumbnail_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", gathering.UserID, gathering.Title, gathering.Latitude, gathering.Longitude, gathering.DateTime, gathering.DurationInHours, gathering.MaxParticipants, gathering.ThumbnailURL)
 	if err != nil {
 		return 0, err
 	}
@@ -38,6 +38,18 @@ func (m *manager) UpdateGathering(gathering *gathering.Gathering) error {
 func (m *manager) DeleteGathering(id int) error {
 	_, err := m.db.Exec("DELETE FROM gatherings WHERE id = ?", id)
 	return err
+}
+
+func (m *manager) CountGatheringOnUser(userID int) (int, error) {
+	row := m.db.QueryRow("SELECT COUNT(*) FROM gatherings WHERE user_id = ?", userID)
+
+	var count int
+	err := row.Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
 }
 
 func (m *manager) CreateParticipant(participant *gathering.Participant) (int, error) {

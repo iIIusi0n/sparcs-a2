@@ -87,3 +87,36 @@ func (m *manager) CountLikeOnPost(postID int) (int, error) {
 
 	return count, nil
 }
+
+func (m *manager) ReadPostsByUserID(userID int) ([]*post.Post, error) {
+	rows, err := m.db.Query("SELECT * FROM posts WHERE user_id = ?", userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var posts []*post.Post
+	for rows.Next() {
+		var p post.Post
+		err := rows.Scan(&p.ID, &p.UserID, &p.Title, &p.Description, &p.Latitude, &p.Longitude, &p.ImageURL, &p.HashTags, &p.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+
+		posts = append(posts, &p)
+	}
+
+	return posts, nil
+}
+
+func (m *manager) CountPostsOnUser(userID int) (int, error) {
+	row := m.db.QueryRow("SELECT COUNT(*) FROM posts WHERE user_id = ?", userID)
+
+	var count int
+	err := row.Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}

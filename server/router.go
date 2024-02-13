@@ -1,6 +1,8 @@
 package server
 
 import (
+	"api-server/config"
+	"api-server/middlewares"
 	"github.com/gin-gonic/gin"
 
 	cImage "api-server/controllers/image"
@@ -14,18 +16,26 @@ func NewRouter() *gin.Engine {
 	{
 		v1 := api.Group("/v1")
 		{
-			user := v1.Group("/debug") // TODO: Remove this
-			{
-				user.GET("/token/:id/:name", cUser.TemporaryTokenRouter)
+			if config.ServerDebug {
+				debug := v1.Group("/debug")
+				{
+					debug.GET("/token/:id/:name", cUser.TemporaryTokenRouter)
+				}
 			}
 
 			image := v1.Group("/image")
 			{
-				// image.Use(middlewares.JwtAuthMiddleware)
-
 				image.GET("/:id", cImage.GetImageRouter)
 				image.POST("/", cImage.UploadImageRouter)
 				image.DELETE("/:id", cImage.DeleteImageRouter)
+			}
+
+			user := v1.Group("/user")
+			{
+				user.Use(middlewares.JwtAuthMiddleware)
+
+				user.GET("/", cUser.GetLoggedInUserRouter)
+				user.GET("/stats", cUser.GetStatsRouter)
 			}
 		}
 	}

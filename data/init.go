@@ -24,6 +24,9 @@ type ManagerModel interface {
 	UpdatePost(post *post.Post) error
 	DeletePost(id int) error
 
+	ReadPostsByUserID(userID int) ([]*post.Post, error)
+	CountPostsOnUser(userID int) (int, error)
+
 	CreateLike(like *post.Like) (int, error)
 	ReadLike(id int) (*post.Like, error)
 	UpdateLike(like *post.Like) error
@@ -35,6 +38,8 @@ type ManagerModel interface {
 	ReadGathering(id int) (*gathering.Gathering, error)
 	UpdateGathering(gathering *gathering.Gathering) error
 	DeleteGathering(id int) error
+
+	CountGatheringOnUser(userID int) (int, error)
 
 	CreateParticipant(participant *gathering.Participant) (int, error)
 	ReadParticipant(id int) (*gathering.Participant, error)

@@ -36,14 +36,16 @@ CREATE TABLE likes
 
 CREATE TABLE gatherings
 (
-    id               INT          NOT NULL AUTO_INCREMENT,
-    user_id          INT          NOT NULL,
-    title            VARCHAR(255) NOT NULL,
-    latitude         DECIMAL(10, 8),
-    longitude        DECIMAL(11, 8),
-    date_time        DATETIME     NOT NULL,
-    max_participants INT          NOT NULL,
-    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id                INT          NOT NULL AUTO_INCREMENT,
+    user_id           INT          NOT NULL,
+    title             VARCHAR(255) NOT NULL,
+    latitude          DECIMAL(10, 8),
+    longitude         DECIMAL(11, 8),
+    date_time         DATETIME     NOT NULL,
+    duration_in_hours INT          NOT NULL,
+    max_participants  INT          NOT NULL,
+    thumbnail_url     VARCHAR(255) NOT NULL,
+    created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
