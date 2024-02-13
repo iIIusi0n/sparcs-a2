@@ -144,13 +144,18 @@ func GetGatheringParticipantsRouter(c *gin.Context) {
 		return
 	}
 
-	participants, err := data.Manager.CountParticipantOnGathering(idNum)
+	var result []int
+	participants, err := data.Manager.ReadParticipantsByGatheringID(idNum)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, participants)
+	for _, participant := range participants {
+		result = append(result, participant.UserID)
+	}
+
+	c.JSON(200, result)
 }
 
 func ParticipateGatheringRouter(c *gin.Context) {

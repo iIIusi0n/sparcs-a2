@@ -48,6 +48,7 @@ type ManagerModel interface {
 	CreateParticipant(participant *gathering.Participant) (int, error)
 	ReadParticipant(id int) (*gathering.Participant, error)
 	ReadParticipantsByUserID(userID int) ([]*gathering.Participant, error)
+	ReadParticipantsByGatheringID(gatheringID int) ([]*gathering.Participant, error)
 	UpdateParticipant(participant *gathering.Participant) error
 	DeleteParticipant(id int) error
 

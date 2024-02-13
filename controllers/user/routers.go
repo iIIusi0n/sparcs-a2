@@ -42,6 +42,24 @@ func GetLoggedInUserRouter(c *gin.Context) {
 	c.JSON(200, user)
 }
 
+func GetUserRouter(c *gin.Context) {
+	id := c.Param("id")
+
+	idNum, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid id"})
+		return
+	}
+
+	user, err := data.Manager.ReadUser(idNum)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to read user"})
+		return
+	}
+
+	c.JSON(200, user)
+}
+
 func GetStatsRouter(c *gin.Context) {
 	uid, _ := c.Get("uid")
 

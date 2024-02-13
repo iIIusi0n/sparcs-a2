@@ -138,6 +138,26 @@ func (m *manager) ReadParticipantsByUserID(userID int) ([]*gathering.Participant
 	return participants, nil
 }
 
+func (m *manager) ReadParticipantsByGatheringID(gatheringID int) ([]*gathering.Participant, error) {
+	rows, err := m.db.Query("SELECT * FROM gathering_participants WHERE gathering_id = ?", gatheringID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	participants := make([]*gathering.Participant, 0)
+	for rows.Next() {
+		var p gathering.Participant
+		err := rows.Scan(&p.ID, &p.GatheringID, &p.UserID, &p.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		participants = append(participants, &p)
+	}
+
+	return participants, nil
+}
+
 func (m *manager) UpdateParticipant(participant *gathering.Participant) error {
 	_, err := m.db.Exec("UPDATE gathering_participants SET gathering_id = ?, user_id = ? WHERE id = ?", participant.GatheringID, participant.UserID, participant.ID)
 	return err

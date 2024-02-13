@@ -39,6 +39,7 @@ func NewRouter() *gin.Engine {
 				user.Use(middlewares.JwtAuthMiddleware)
 
 				user.GET("/", cUser.GetLoggedInUserRouter)
+				user.GET("/:id", cUser.GetUserRouter)
 				user.GET("/stats", cUser.GetStatsRouter)
 
 				user.PATCH("/", cUser.UpdateUserRouter)
