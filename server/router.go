@@ -36,6 +36,8 @@ func NewRouter() *gin.Engine {
 
 				user.GET("/", cUser.GetLoggedInUserRouter)
 				user.GET("/stats", cUser.GetStatsRouter)
+
+				user.PATCH("/", cUser.UpdateUserRouter)
 			}
 		}
 	}

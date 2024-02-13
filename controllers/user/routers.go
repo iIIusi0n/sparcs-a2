@@ -69,3 +69,22 @@ func GetStatsRouter(c *gin.Context) {
 		"total_posts":      totalPosts,
 	})
 }
+
+func UpdateUserRouter(c *gin.Context) {
+	uid, _ := c.Get("uid")
+
+	var u User
+	if err := c.ShouldBindJSON(&u); err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request"})
+		return
+	}
+
+	u.ID = uid.(int)
+	err := data.Manager.UpdateUser(&u)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to update user"})
+		return
+	}
+
+	c.JSON(200, gin.H{"message": "User updated"})
+}
