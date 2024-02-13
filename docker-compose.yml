@@ -10,12 +10,8 @@ services:
   # Golang API server
   api-server:
     build: .
-    volumes:
-      - .:/app
-    command:
-      - /bin/bash
-      - -c
-      - ./api-server
+    depends_on:
+      - db
 
   # React builder
   react:
@@ -39,3 +35,4 @@ services:
       - "443:443"
     depends_on:
       - react
+      - api-server
