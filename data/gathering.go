@@ -5,8 +5,7 @@ import (
 )
 
 func (m *manager) CreateGathering(gathering *gathering.Gathering) (int, error) {
-	result, err := m.db.Exec("INSERT INTO gatherings (title, latitude, longitude, date_time, max_participants) VALUES (?, ?, ?, ?, ?)",
-		gathering.Title, gathering.Latitude, gathering.Longitude, gathering.DateTime, gathering.MaxParticipants)
+	result, err := m.db.Exec("INSERT INTO gatherings (user_id, title, latitude, longitude, date_time, max_participants) VALUES (?, ?, ?, ?, ?, ?)", gathering.UserID, gathering.Title, gathering.Latitude, gathering.Longitude, gathering.DateTime, gathering.MaxParticipants)
 	if err != nil {
 		return 0, err
 	}
@@ -32,8 +31,7 @@ func (m *manager) ReadGathering(id int) (*gathering.Gathering, error) {
 }
 
 func (m *manager) UpdateGathering(gathering *gathering.Gathering) error {
-	_, err := m.db.Exec("UPDATE gatherings SET title = ?, latitude = ?, longitude = ?, date_time = ?, max_participants = ? WHERE id = ?",
-		gathering.Title, gathering.Latitude, gathering.Longitude, gathering.DateTime, gathering.MaxParticipants, gathering.ID)
+	_, err := m.db.Exec("UPDATE gatherings SET title = ?, latitude = ?, longitude = ?, date_time = ?, max_participants = ? WHERE id = ?", gathering.Title, gathering.Latitude, gathering.Longitude, gathering.DateTime, gathering.MaxParticipants, gathering.ID)
 	return err
 }
 

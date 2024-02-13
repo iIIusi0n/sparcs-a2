@@ -5,8 +5,7 @@ import (
 )
 
 func (m *manager) CreatePost(post *post.Post) (int, error) {
-	result, err := m.db.Exec("INSERT INTO posts (user_id, title, description, latitude, longitude, image_url, hashtags) VALUES (?, ?, ?, ?, ?, ?, ?)",
-		post.UserID, post.Title, post.Description, post.Latitude, post.Longitude, post.ImageURL, post.HashTags)
+	result, err := m.db.Exec("INSERT INTO posts (user_id, title, description, latitude, longitude, image_url, hashtags) VALUES (?, ?, ?, ?, ?, ?, ?)", post.UserID, post.Title, post.Description, post.Latitude, post.Longitude, post.ImageURL, post.HashTags)
 	if err != nil {
 		return 0, err
 	}
@@ -32,8 +31,7 @@ func (m *manager) ReadPost(id int) (*post.Post, error) {
 }
 
 func (m *manager) UpdatePost(post *post.Post) error {
-	_, err := m.db.Exec("UPDATE posts SET title = ?, description = ?, latitude = ?, longitude = ?, image_url = ?, hashtags = ? WHERE id = ?",
-		post.Title, post.Description, post.Latitude, post.Longitude, post.ImageURL, post.HashTags, post.ID)
+	_, err := m.db.Exec("UPDATE posts SET title = ?, description = ?, latitude = ?, longitude = ?, image_url = ?, hashtags = ? WHERE id = ?", post.Title, post.Description, post.Latitude, post.Longitude, post.ImageURL, post.HashTags, post.ID)
 	return err
 }
 
