@@ -6,7 +6,7 @@ type Gathering struct {
 	Title           string  `json:"title"`
 	Latitude        float64 `json:"latitude"`
 	Longitude       float64 `json:"longitude"`
-	Time            string  `json:"time"`
+	DateTime        string  `json:"time"`
 	MaxParticipants int     `json:"max_participants"`
 	CreatedAt       string  `json:"created_at"`
 }
