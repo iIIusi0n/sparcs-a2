@@ -6,6 +6,7 @@ import MediaQuery from "react-responsive";
 import Title from "./components/title";
 import AddPin from "../components/AddPin.jsx";
 import PinMarker from "../components/PinMarker.jsx";
+import ScrollBar from "../components/ScrollBar.jsx";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,6 +24,7 @@ const Main = (props) => {
             <Title></Title>
             <AddPin></AddPin>
             <PinMarker></PinMarker>
+            <ScrollBar></ScrollBar>
             <NavigationBar></NavigationBar>
           </Container>
         </div>

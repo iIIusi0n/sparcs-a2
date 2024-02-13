@@ -31,11 +31,11 @@ const NavigationBar = () => {
           </button>
           <p
             style={{
-              fontSize: "20px",
+              fontSize: "14px",
               fontFamily: "Pretendard",
               position: "relative",
               margin: "0",
-              left: "10px",
+              left: "14px",
               color: "#FF772A",
             }}
           >
@@ -51,14 +51,22 @@ const NavigationBar = () => {
             flexDirection: "column",
           }}
         >
-          <img src={pinIcon} alt="Pin Icon" />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img src={pinIcon} alt="Pin Icon" />
+          </button>
           <p
             style={{
               fontSize: "14px",
               fontFamily: "Pretendard",
               position: "relative",
               margin: "0",
-              left: "4px",
+              left: "8px",
             }}
           >
             PIN
@@ -73,12 +81,21 @@ const NavigationBar = () => {
             flexDirection: "column",
           }}
         >
-          <img src={messageIcon} alt="Message Icon" />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img src={messageIcon} alt="Message Icon" />
+          </button>
           <p
             style={{
               fontSize: "14px",
               fontFamily: "Pretendard",
               position: "relative",
+              left: "4px",
               margin: "0",
             }}
           >
@@ -89,20 +106,29 @@ const NavigationBar = () => {
         <div
           style={{
             position: "fixed",
-            bottom: "15px",
+            bottom: "17px",
             left: "320px",
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <img src={profileIcon} alt="Profile Icon" />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img src={profileIcon} alt="Profile Icon" />
+          </button>
           <p
             style={{
               fontSize: "14px",
               fontFamily: "Pretendard",
               position: "relative",
               margin: "0",
-              top: "2px",
+              top: "4px",
+              left: "2px",
             }}
           >
             마이
@@ -120,18 +146,26 @@ const NavigationBar = () => {
             flexDirection: "column",
           }}
         >
-          <img
-            src={homeIcon}
-            alt="Home Icon"
-            style={{ width: "auto", height: "20px" }}
-          />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img
+              src={homeIcon}
+              alt="Home Icon"
+              style={{ width: "auto", height: "20px" }}
+            />
+          </button>
           <p
             style={{
               fontSize: "8px",
               fontFamily: "Pretendard",
               position: "relative",
               margin: "0",
-              left: "6px",
+              left: "12px",
               color: "#FF772A",
             }}
           >
@@ -147,18 +181,26 @@ const NavigationBar = () => {
             flexDirection: "column",
           }}
         >
-          <img
-            src={pinIcon}
-            alt="Pin Icon"
-            style={{ width: "auto", height: "20px" }}
-          />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img
+              src={pinIcon}
+              alt="Pin Icon"
+              style={{ width: "auto", height: "20px" }}
+            />
+          </button>
           <p
             style={{
               fontSize: "8px",
               fontFamily: "Pretendard",
               position: "relative",
               margin: "0",
-              left: "4px",
+              left: "10px",
             }}
           >
             PIN
@@ -173,17 +215,25 @@ const NavigationBar = () => {
             flexDirection: "column",
           }}
         >
-          <img
-            src={messageIcon}
-            alt="Message Icon"
-            style={{ width: "auto", height: "20px" }}
-          />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img
+              src={messageIcon}
+              alt="Message Icon"
+              style={{ width: "auto", height: "20px" }}
+            />
+          </button>
           <p
             style={{
               fontSize: "8px",
               fontFamily: "Pretendard",
               position: "relative",
-              left: "3px",
+              left: "8px",
               margin: "0",
             }}
           >
@@ -200,11 +250,19 @@ const NavigationBar = () => {
             flexDirection: "column",
           }}
         >
-          <img
-            src={profileIcon}
-            alt="Profile Icon"
-            style={{ width: "auto", height: "20px" }}
-          />
+          <button
+            style={{
+              background: "white",
+              border: "white",
+              margin: "0px",
+            }}
+          >
+            <img
+              src={profileIcon}
+              alt="Profile Icon"
+              style={{ width: "auto", height: "20px" }}
+            />
+          </button>
           <p
             style={{
               fontSize: "8px",
@@ -212,7 +270,7 @@ const NavigationBar = () => {
               position: "relative",
               margin: "0",
               top: "2px",
-              left: "3px",
+              left: "8px",
             }}
           >
             마이
