@@ -10,12 +10,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type ManagerModel interface {
-	CreateUser(user *User) (int, error)
-	ReadUser(id int) (*User, error)
-	UpdateUser(user *User) error
-	DeleteUser(id int) error
-}
+type ManagerModel interface{}
 
 type manager struct {
 	db *sql.DB
