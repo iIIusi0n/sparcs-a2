@@ -21,7 +21,9 @@ const ComponentsPinScroll = ({
           position: "absolute",
         }}
       >
-        <img src={value} alt="이미지" />
+        <button>
+          <img src={value} alt="이미지" />
+        </button>
       </div>
       <div style={{ position: "absolute", left: "150px" }}>
         <p style={{ fontSize: "18px", color: "#FF772A", fontWeight: "bold" }}>
