@@ -48,6 +48,27 @@ func (m *manager) ReadChatRoom(id int) (*ChatRoom, error) {
 	return &chatRoom, nil
 }
 
+func (m *manager) ReadChatRooms() ([]*ChatRoom, error) {
+	query := "SELECT * FROM chat_rooms"
+	rows, err := m.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+
+	chatRooms := []*ChatRoom{}
+	for rows.Next() {
+		chatRoom := ChatRoom{}
+		err := rows.Scan(&chatRoom.ID, &chatRoom.Name, &chatRoom.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+
+		chatRooms = append(chatRooms, &chatRoom)
+	}
+
+	return chatRooms, nil
+}
+
 func (m *manager) UpdateChatRoom(chatRoom *ChatRoom) error {
 	query := "UPDATE chat_rooms SET name = ? WHERE id = ?"
 	_, err := m.db.Exec(query, chatRoom.Name, chatRoom.ID)
@@ -94,6 +115,27 @@ func (m *manager) ReadChat(id int) (*Chat, error) {
 	}
 
 	return &chat, nil
+}
+
+func (m *manager) ReadChatsByRoomID(roomID int) ([]*Chat, error) {
+	query := "SELECT * FROM chats WHERE room_id = ? ORDER BY created_at"
+	rows, err := m.db.Query(query, roomID)
+	if err != nil {
+		return nil, err
+	}
+
+	chats := []*Chat{}
+	for rows.Next() {
+		chat := Chat{}
+		err := rows.Scan(&chat.ID, &chat.RoomID, &chat.SenderID, &chat.Content, &chat.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+
+		chats = append(chats, &chat)
+	}
+
+	return chats, nil
 }
 
 func (m *manager) UpdateChat(chat *Chat) error {

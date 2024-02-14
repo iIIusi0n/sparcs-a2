@@ -52,6 +52,28 @@ func (m *manager) ReadHospital(id int) (*Hospital, error) {
 	return &hospital, nil
 }
 
+func (m *manager) ReadHospitals() ([]*Hospital, error) {
+	query := "SELECT * FROM hospitals"
+	rows, err := m.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	hospitals := []*Hospital{}
+	for rows.Next() {
+		hospital := Hospital{}
+		err := rows.Scan(&hospital.ID, &hospital.Name, &hospital.Latitude, &hospital.Longitude, &hospital.NumberOfDoctor, &hospital.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		hospitals = append(hospitals, &hospital)
+	}
+
+	return hospitals, nil
+
+}
+
 func (m *manager) UpdateHospital(hospital *Hospital) error {
 	query := "UPDATE hospitals SET name = ?, latitude = ?, longitude = ?, number_of_doctor = ? WHERE id = ?"
 	_, err := m.db.Exec(query, hospital.Name, hospital.Latitude, hospital.Longitude, hospital.NumberOfDoctor, hospital.ID)
@@ -95,6 +117,27 @@ func (m *manager) ReadInHospital(hospitalID, userID int) (*InHospital, error) {
 	return &inHospital, nil
 }
 
+func (m *manager) ReadInHospitalsByHospitalID(hospitalID int) ([]*InHospital, error) {
+	query := "SELECT * FROM in_hospitals WHERE hospital_id = ? and created_at > DATE_SUB(NOW(), INTERVAL 1 DAY)"
+	rows, err := m.db.Query(query, hospitalID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	inHospitals := []*InHospital{}
+	for rows.Next() {
+		inHospital := InHospital{}
+		err := rows.Scan(&inHospital.HospitalID, &inHospital.UserID, &inHospital.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		inHospitals = append(inHospitals, &inHospital)
+	}
+
+	return inHospitals, nil
+}
+
 func (m *manager) UpdateInHospital(inHospital *InHospital) error {
 	query := "UPDATE in_hospitals SET hospital_id = ?, user_id = ? WHERE hospital_id = ? AND user_id = ?"
 	_, err := m.db.Exec(query, inHospital.HospitalID, inHospital.UserID, inHospital.HospitalID, inHospital.UserID)
@@ -128,6 +171,19 @@ func (m *manager) CreateWaitingNumber(waitingNumber *WaitingNumber) error {
 func (m *manager) ReadWaitingNumber(hospitalID, userID int) (*WaitingNumber, error) {
 	query := "SELECT * FROM waiting_numbers WHERE hospital_id = ? AND user_id = ?"
 	row := m.db.QueryRow(query, hospitalID, userID)
+
+	waitingNumber := WaitingNumber{}
+	err := row.Scan(&waitingNumber.UserID, &waitingNumber.HospitalID, &waitingNumber.Number, &waitingNumber.CreatedAt)
+	if err != nil {
+		return nil, err
+	}
+
+	return &waitingNumber, nil
+}
+
+func (m *manager) ReadLatestWaitingNumber(hospitalID int) (*WaitingNumber, error) {
+	query := "SELECT * FROM waiting_numbers WHERE hospital_id = ? ORDER BY created_at DESC LIMIT 1"
+	row := m.db.QueryRow(query, hospitalID)
 
 	waitingNumber := WaitingNumber{}
 	err := row.Scan(&waitingNumber.UserID, &waitingNumber.HospitalID, &waitingNumber.Number, &waitingNumber.CreatedAt)

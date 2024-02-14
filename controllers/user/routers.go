@@ -85,3 +85,19 @@ func UpdateUserRouter(c *gin.Context) {
 
 	c.JSON(200, gin.H{"message": "User updated"})
 }
+
+func CreateUserRouter(c *gin.Context) {
+	var u data.User
+	if err := c.ShouldBindJSON(&u); err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request"})
+		return
+	}
+
+	uid, err := data.Manager.CreateUser(&u)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to create user"})
+		return
+	}
+
+	c.JSON(200, gin.H{"uid": uid})
+}

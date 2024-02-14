@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import ReactMapGL from "react-map-gl";
 
 function MapboxSmall() {
   const [markers, setMarkers] = useState([
-    { longtitude: 127.3845475, latitude: 36.3504119, color: "#FF0000" },
+    {
+      longtitude: 127.3845475,
+      latitude: 36.3504119,
+      color: "#ffffff"
+    },
   ]);
 
   useEffect(() => {
@@ -15,15 +18,6 @@ function MapboxSmall() {
       style: "mapbox://styles/mapbox/streets-v11",
       center: [127.3845475, 36.3504119], // 초기 위치 (경도, 위도)
       zoom: 14, // 초기 줌 레벨
-    });
-
-    markers.forEach((marker) => {
-      const el = document.createElement("div");
-      el.className = "marker";
-      el.style.color = marker.color;
-      new mapboxgl.Marker(el)
-        .setLngLat([marker.longtitude, marker.latitude])
-        .addTo(map);
     });
 
     /* const marker = new mapboxgl.Marker({

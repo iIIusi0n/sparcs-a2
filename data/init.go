@@ -18,26 +18,31 @@ type ManagerModel interface {
 
 	CreateHospital(hospital *Hospital) (int, error)
 	ReadHospital(id int) (*Hospital, error)
+	ReadHospitals() ([]*Hospital, error)
 	UpdateHospital(hospital *Hospital) error
 	DeleteHospital(id int) error
 
 	CreateInHospital(inHospital *InHospital) error
 	ReadInHospital(hospitalID, userID int) (*InHospital, error)
+	ReadInHospitalsByHospitalID(hospitalID int) ([]*InHospital, error)
 	UpdateInHospital(inHospital *InHospital) error
 	DeleteInHospital(hospitalID, userID int) error
 
 	CreateWaitingNumber(waitingNumber *WaitingNumber) error
 	ReadWaitingNumber(hospitalID, userID int) (*WaitingNumber, error)
+	ReadLatestWaitingNumber(hospitalID int) (*WaitingNumber, error)
 	UpdateWaitingNumber(waitingNumber *WaitingNumber) error
 	DeleteWaitingNumber(hospitalID, userID int) error
 
 	CreateChatRoom(chatRoom *ChatRoom) (int, error)
 	ReadChatRoom(id int) (*ChatRoom, error)
+	ReadChatRooms() ([]*ChatRoom, error)
 	UpdateChatRoom(chatRoom *ChatRoom) error
 	DeleteChatRoom(id int) error
 
 	CreateChat(chat *Chat) (int, error)
 	ReadChat(id int) (*Chat, error)
+	ReadChatsByRoomID(roomID int) ([]*Chat, error)
 	UpdateChat(chat *Chat) error
 	DeleteChat(id int) error
 

@@ -5,6 +5,8 @@ import (
 	"api-server/middlewares"
 	"github.com/gin-gonic/gin"
 
+	cChat "api-server/controllers/chat"
+	cHospital "api-server/controllers/hospital"
 	cImage "api-server/controllers/image"
 	cUser "api-server/controllers/user"
 )
@@ -39,7 +41,36 @@ func NewRouter() *gin.Engine {
 				user.GET("/", cUser.GetLoggedInUserRouter)
 				user.GET("/:id", cUser.GetUserRouter)
 
+				user.POST("/", cUser.CreateUserRouter)
+
 				user.PATCH("/", cUser.UpdateUserRouter)
+			}
+
+			hospital := v1.Group("/hospital")
+			{
+				hospital.Use(middlewares.JwtAuthMiddleware)
+
+				hospital.GET("/", cHospital.GetHospitalsRouter)
+				hospital.GET("/:id", cHospital.GetHospitalRouter)
+				hospital.GET("/:id/waiting", cHospital.GetHospitalWaitingNumberRouter)
+
+				hospital.POST("/", cHospital.CreateHospitalRouter)
+
+				hospital.PATCH("/:id", cHospital.UpdateHospitalRouter)
+			}
+
+			chat := v1.Group("/chat")
+			{
+				chat.Use(middlewares.JwtAuthMiddleware)
+
+				chat.GET("/room", cChat.GetChatRoomsRouter)
+				chat.GET("/room/:id", cChat.GetChatRoomRouter)
+
+				chat.POST("/room", cChat.CreateChatRoomRouter)
+
+				chat.GET("/message/:room_id", cChat.GetChatMessagesRouter)
+
+				chat.POST("/message/:room_id", cChat.CreateChatMessageRouter)
 			}
 		}
 	}
