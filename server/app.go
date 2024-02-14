@@ -12,6 +12,12 @@ import (
 func init() {
 	config.ServerName = os.Getenv("SERVER_DOMAIN")
 	config.ServerSecret = os.Getenv("SERVER_SECRET_KEY")
+
+	if os.Getenv("IS_DEV") == "false" {
+		config.ServerDebug = false
+	} else {
+		config.ServerDebug = true
+	}
 }
 
 func Start() error {

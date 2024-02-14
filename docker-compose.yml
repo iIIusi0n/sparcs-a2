@@ -22,6 +22,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - SERVER_DOMAIN=${SERVER_DOMAIN}
       - SERVER_SECRETE_KEY=${SERVER_SECRETE_KEY}
+      - IS_DEV=${IS_DEV}
     depends_on:
       - db
 
