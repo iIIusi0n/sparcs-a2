@@ -110,6 +110,31 @@ func CreateHospitalRouter(c *gin.Context) {
 	c.JSON(200, gin.H{"id": id})
 }
 
+func CreateHospitalWaitingNumberRouter(c *gin.Context) {
+	hospitalID := c.Param("id")
+	hospitalIdNum, err := strconv.Atoi(hospitalID)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid id"})
+		return
+	}
+
+	var waitingNumber data.WaitingNumber
+	if err := c.ShouldBindJSON(&waitingNumber); err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request body"})
+		return
+	}
+
+	waitingNumber.HospitalID = hospitalIdNum
+	err = data.Manager.CreateWaitingNumber(&waitingNumber)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to create waiting number"})
+		return
+	}
+
+	c.JSON(200, gin.H{"id": waitingNumber.HospitalID})
+
+}
+
 func UpdateHospitalRouter(c *gin.Context) {
 	hospitalID := c.Param("id")
 	hospitalIdNum, err := strconv.Atoi(hospitalID)

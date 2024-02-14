@@ -55,6 +55,7 @@ func NewRouter() *gin.Engine {
 				hospital.GET("/:id/waiting", cHospital.GetHospitalWaitingNumberRouter)
 
 				hospital.POST("/", cHospital.CreateHospitalRouter)
+				hospital.POST("/:id/waiting", cHospital.CreateHospitalWaitingNumberRouter)
 
 				hospital.PATCH("/:id", cHospital.UpdateHospitalRouter)
 			}
