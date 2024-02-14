@@ -30,6 +30,10 @@ func SendRequest(method, url, body string) (int, string) {
 	}
 	req.Header.Set("Content-Type", "application/json")
 
+	if Token != "" {
+		req.Header.Set("Cookie", "token="+Token)
+	}
+
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -50,6 +54,8 @@ func main() {
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 
 	CreateTokenForDebug()
+
+	TestUserRouter()
 }
 
 func CreateTokenForDebug() {
@@ -79,4 +85,15 @@ func CreateTokenForDebug() {
 	Token = response.Token
 
 	log.Println("Token:", Token)
+}
+
+func TestUserRouter() {
+	url := ServerURL + "/api/v1/user/"
+
+	status, body := SendRequest("GET", url, "")
+	if status != 200 {
+		panic("Failed to get user: " + body)
+	}
+
+	log.Println("User:", body)
 }

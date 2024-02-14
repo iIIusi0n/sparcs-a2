@@ -26,6 +26,7 @@ func TemporaryTokenRouter(c *gin.Context) {
 
 	}
 
+	user.ID = uid
 	token, err := auth.BuildNewToken(user)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to generate token"})
