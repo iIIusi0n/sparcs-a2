@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "./components/header";
-import NavigationBar from "../components/NavigationBar";
+import Header from "../components/header/header.jsx";
+import NavigationBar from "../components/navigation/NavigationBar.jsx";
 import MediaQuery from "react-responsive";
-import Title from "./components/title";
-import AddPin from "../components/AddPin.jsx";
-import PinMarker from "../components/PinMarker.jsx";
+import Title from "../components/recommandMarker/title.jsx";
+import AddPin from "../components/recommandMarker/AddPin.jsx";
+import PinMarker from "../components/addWating/PinMarker.jsx";
 import ScrollBar from "../components/ScrollBar.jsx";
 import ScrollBarBig from "../components/ScrollBarBig.jsx";
-import Marker from "../components/Marker.jsx";
-import Button from "../components/Button.jsx";
-import ButtonBig from "../components/ButtonBig.jsx";
-import PinComponent from "../components/PinComponent.jsx";
+import Marker from "../components/recommandMarker/Marker.jsx";
+import Button from "../components/pins/Button.jsx";
+import ButtonBig from "../components/pins/ButtonBig.jsx";
+import PinComponent from "../components/pins/PinComponent.jsx";
 const Container = styled.div`
   display: flex;
   flex-direction: column;

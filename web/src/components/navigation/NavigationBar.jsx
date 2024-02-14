@@ -1,9 +1,8 @@
 import React from "react";
-import homeIcon from "../components/icons/Frame 14.png";
-import pinIcon from "../components/icons/map.png";
-import messageIcon from "../components/icons/ellipsis.bubble.png";
-import profileIcon from "../components/icons/iconusercirclealt.png";
-import styled from "styled-components";
+import homeIcon from "../icons/Frame 14.png";
+import pinIcon from "../icons/map.png";
+import messageIcon from "../icons/ellipsis.bubble.png";
+import profileIcon from "../icons/iconusercirclealt.png";
 import MediaQuery from "react-responsive";
 
 const NavigationBar = () => {

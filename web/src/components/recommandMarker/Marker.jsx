@@ -1,6 +1,6 @@
 import React from "react";
 import MediaQuery from "react-responsive";
-import markerIcon from "./icons/Group.png";
+import markerIcon from "../icons/Group.png";
 
 const Marker = () => {
   return (

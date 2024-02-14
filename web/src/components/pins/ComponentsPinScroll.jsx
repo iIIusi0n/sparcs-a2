@@ -1,6 +1,6 @@
 import React from "react";
-import walkIcon from "./icons/walk.png";
-import heartIcon from "./icons/heart.png";
+import walkIcon from "../icons/walk.png";
+import heartIcon from "../icons/heart.png";
 
 const ComponentsPinScroll = ({
   value,
