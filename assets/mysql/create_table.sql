@@ -1,73 +1,69 @@
 CREATE TABLE users
 (
-    id              INT                 NOT NULL AUTO_INCREMENT,
-    username        VARCHAR(255) UNIQUE NOT NULL,
-    name            VARCHAR(255) UNIQUE NOT NULL,
-    profile_picture VARCHAR(255),
-    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id            INT                 NOT NULL AUTO_INCREMENT,
+    username      VARCHAR(255) UNIQUE NOT NULL,
+    real_name     VARCHAR(255)        NOT NULL,
+    email         VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255)        NOT NULL,
+    phone_number  VARCHAR(255) UNIQUE NOT NULL,
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE posts
+CREATE TABLE hospitals
 (
-    id          INT          NOT NULL AUTO_INCREMENT,
-    user_id     INT          NOT NULL,
-    title       VARCHAR(255) NOT NULL,
-    description TEXT,
-    latitude    DECIMAL(10, 8),
-    longitude   DECIMAL(11, 8),
-    image_url   VARCHAR(255) NOT NULL,
-    hashtags    VARCHAR(255),
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    id               INT            NOT NULL AUTO_INCREMENT,
+    name             VARCHAR(255)   NOT NULL,
+    latitude         DECIMAL(10, 8) NOT NULL,
+    longitude        DECIMAL(11, 8) NOT NULL,
+    number_of_doctor INT            NOT NULL,
+    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE likes
+CREATE TABLE in_hospitals
 (
-    id         INT NOT NULL AUTO_INCREMENT,
+    hospital_id INT NOT NULL,
     user_id    INT NOT NULL,
-    post_id    INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (post_id) REFERENCES posts (id)
+    FOREIGN KEY (hospital_id) REFERENCES hospitals (id)
 );
 
-CREATE TABLE gatherings
+CREATE TABLE waiting_numbers
 (
-    id                INT          NOT NULL AUTO_INCREMENT,
-    user_id           INT          NOT NULL,
-    title             VARCHAR(255) NOT NULL,
-    latitude          DECIMAL(10, 8),
-    longitude         DECIMAL(11, 8),
-    date_time         DATETIME     NOT NULL,
-    duration_in_hours INT          NOT NULL,
-    max_participants  INT          NOT NULL,
-    thumbnail_url     VARCHAR(255) NOT NULL,
-    created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
+    user_id    INT NOT NULL,
+    hospital_id INT NOT NULL,
+    number    INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (hospital_id) REFERENCES hospitals (id)
+);
+
+CREATE TABLE chat_rooms
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE chats
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    room_id INT NOT NULL,
+    sender_id INT NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (room_id) REFERENCES chat_rooms (id),
+    FOREIGN KEY (sender_id) REFERENCES users (id)
+);
+
+CREATE TABLE chat_read
+(
+    chat_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (chat_id) REFERENCES chats (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
-);
-
-CREATE TABLE gathering_participants
-(
-    id           INT NOT NULL AUTO_INCREMENT,
-    gathering_id INT NOT NULL,
-    user_id      INT NOT NULL,
-    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (gathering_id) REFERENCES gatherings (id),
-    FOREIGN KEY (user_id) REFERENCES users (id)
-);
-
-CREATE TABLE gathering_locations
-(
-    id           INT          NOT NULL AUTO_INCREMENT,
-    gathering_id INT          NOT NULL,
-    post_id      INT          NOT NULL,
-    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (gathering_id) REFERENCES gatherings (id),
-    FOREIGN KEY (post_id) REFERENCES posts (id)
 );
