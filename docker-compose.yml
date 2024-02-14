@@ -26,10 +26,10 @@ services:
       - db
 
   # React builder
-  react:
-    build: ./web
-    volumes:
-      - ./web:/app
+  # react:
+  #   build: ./web
+  #   volumes:
+  #     - ./web:/app
 
   # Caddy reverse proxy
   caddy:
@@ -44,5 +44,5 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - react
+  #     - react
       - api-server

@@ -9,6 +9,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func init() {
+	config.ServerName = os.Getenv("SERVER_DOMAIN")
+	config.ServerSecret = os.Getenv("SERVER_SECRET_KEY")
+}
+
 func Start() error {
 	serverLogFile, err := os.OpenFile(config.ServerLog, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {

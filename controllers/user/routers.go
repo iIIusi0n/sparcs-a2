@@ -1,6 +1,7 @@
 package user
 
 import (
+	"log"
 	"strconv"
 
 	"api-server/config"
@@ -10,16 +11,23 @@ import (
 )
 
 func TemporaryTokenRouter(c *gin.Context) {
-	id := c.Param("id")
+	username := c.Param("username")
 	name := c.Param("name")
 
-	idNumber, err := strconv.Atoi(id)
+	user := data.User{
+		Username: username,
+		Name:     name,
+	}
+	uid, err := data.Manager.CreateUser(&user)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "Invalid id"})
+		log.Println("Failed to create user", err)
+
+		c.JSON(500, gin.H{"error": "Failed to create user"})
 		return
+
 	}
 
-	token, err := auth.BuildNewToken(idNumber, name)
+	token, err := auth.BuildNewToken(uid, name)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to generate token"})
 		return
@@ -27,7 +35,7 @@ func TemporaryTokenRouter(c *gin.Context) {
 
 	c.SetCookie("token", token, 60*60*24, "/", config.ServerName, false, true)
 
-	c.JSON(200, gin.H{"token": token})
+	c.JSON(200, gin.H{"uid": uid, "token": token})
 }
 
 func GetLoggedInUserRouter(c *gin.Context) {

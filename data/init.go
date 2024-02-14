@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"api-server/config"
 	_ "github.com/go-sql-driver/mysql"
@@ -66,6 +67,10 @@ type manager struct {
 var Manager ManagerModel
 
 func init() {
+	config.MysqlUsername = os.Getenv("MYSQL_USER")
+	config.MysqlPassword = os.Getenv("MYSQL_PASSWORD")
+	config.MysqlDatabase = os.Getenv("MYSQL_DATABASE")
+
 	db, err := sql.Open("mysql",
 		fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 			config.MysqlUsername,
