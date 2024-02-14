@@ -19,7 +19,7 @@ func NewRouter() *gin.Engine {
 			if config.ServerDebug {
 				debug := v1.Group("/debug")
 				{
-					debug.GET("/token/:username/:name", cUser.TemporaryTokenRouter)
+					debug.POST("/token", cUser.TemporaryTokenRouter)
 				}
 			}
 

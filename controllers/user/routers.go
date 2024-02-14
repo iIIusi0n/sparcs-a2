@@ -11,13 +11,12 @@ import (
 )
 
 func TemporaryTokenRouter(c *gin.Context) {
-	username := c.Param("username")
-	name := c.Param("name")
-
-	user := data.User{
-		Username: username,
-		Name:     name,
+	var user data.User
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request"})
+		return
 	}
+
 	uid, err := data.Manager.CreateUser(&user)
 	if err != nil {
 		log.Println("Failed to create user", err)
@@ -27,7 +26,7 @@ func TemporaryTokenRouter(c *gin.Context) {
 
 	}
 
-	token, err := auth.BuildNewToken(uid, name)
+	token, err := auth.BuildNewToken(user)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to generate token"})
 		return

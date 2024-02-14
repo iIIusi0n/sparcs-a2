@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"api-server/data"
 	"time"
 
 	"api-server/config"
@@ -10,14 +11,16 @@ import (
 type TokenClaims struct {
 	UserID int    `json:"uid"`
 	Name   string `json:"name"`
+	Email  string `json:"email"`
 
 	jwt.StandardClaims
 }
 
-func BuildNewToken(userID int, name string) (string, error) {
+func BuildNewToken(user data.User) (string, error) {
 	claims := TokenClaims{
-		UserID: userID,
-		Name:   name,
+		UserID: user.ID,
+		Name:   user.RealName,
+		Email:  user.Email,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: jwt.At(time.Now().Add(time.Hour * 24)),
 		},
