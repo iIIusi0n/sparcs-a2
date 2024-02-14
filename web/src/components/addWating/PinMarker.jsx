@@ -1,7 +1,7 @@
 import React from "react";
 import MediaQuery from "react-responsive";
-import pinMarkerIcon from "../components/icons/Frame 15.png";
-import pinMarkerIconBig from "../components/icons/Frame 16.png";
+import pinMarkerIcon from "../icons/Frame 15.png";
+import pinMarkerIconBig from "../icons/Frame 16.png";
 
 const AddPin = () => {
   return (

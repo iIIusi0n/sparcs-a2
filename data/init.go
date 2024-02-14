@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"api-server/config"
 	_ "github.com/go-sql-driver/mysql"
@@ -15,48 +16,35 @@ type ManagerModel interface {
 	UpdateUser(user *User) error
 	DeleteUser(id int) error
 
-	CreatePost(post *Post) (int, error)
-	ReadPost(id int) (*Post, error)
-	ReadPosts() ([]*Post, error)
-	UpdatePost(post *Post) error
-	DeletePost(id int) error
+	CreateHospital(hospital *Hospital) (int, error)
+	ReadHospital(id int) (*Hospital, error)
+	UpdateHospital(hospital *Hospital) error
+	DeleteHospital(id int) error
 
-	ReadPostsByUserID(userID int) ([]*Post, error)
-	CountPostsOnUser(userID int) (int, error)
+	CreateInHospital(inHospital *InHospital) error
+	ReadInHospital(hospitalID, userID int) (*InHospital, error)
+	UpdateInHospital(inHospital *InHospital) error
+	DeleteInHospital(hospitalID, userID int) error
 
-	CreateLike(like *Like) (int, error)
-	ReadLike(id int) (*Like, error)
-	UpdateLike(like *Like) error
-	DeleteLike(id int) error
+	CreateWaitingNumber(waitingNumber *WaitingNumber) error
+	ReadWaitingNumber(hospitalID, userID int) (*WaitingNumber, error)
+	UpdateWaitingNumber(waitingNumber *WaitingNumber) error
+	DeleteWaitingNumber(hospitalID, userID int) error
 
-	CountLikeOnPost(postID int) (int, error)
-	CheckUserLikedPost(userID, postID int) (bool, error)
+	CreateChatRoom(chatRoom *ChatRoom) (int, error)
+	ReadChatRoom(id int) (*ChatRoom, error)
+	UpdateChatRoom(chatRoom *ChatRoom) error
+	DeleteChatRoom(id int) error
 
-	CreateGathering(gathering *Gathering) (int, error)
-	ReadGathering(id int) (*Gathering, error)
-	ReadGatheringsByUserID(userID int) ([]*Gathering, error)
-	ReadGatherings() ([]*Gathering, error)
-	UpdateGathering(gathering *Gathering) error
-	DeleteGathering(id int) error
+	CreateChat(chat *Chat) (int, error)
+	ReadChat(id int) (*Chat, error)
+	UpdateChat(chat *Chat) error
+	DeleteChat(id int) error
 
-	CountGatheringOnUser(userID int) (int, error)
-
-	CreateParticipant(participant *Participant) (int, error)
-	ReadParticipant(id int) (*Participant, error)
-	ReadParticipantsByUserID(userID int) ([]*Participant, error)
-	ReadParticipantsByGatheringID(gatheringID int) ([]*Participant, error)
-	UpdateParticipant(participant *Participant) error
-	DeleteParticipant(id int) error
-
-	CountParticipantOnGathering(gatheringID int) (int, error)
-	CheckUserParticipatedGathering(userID, gatheringID int) (bool, error)
-
-	CreateGatheringLocation(location *Location) (int, error)
-	ReadGatheringLocation(id int) (*Location, error)
-	UpdateGatheringLocation(location *Location) error
-	DeleteGatheringLocation(id int) error
-
-	ReadGatheringLocationByGatheringID(gatheringID int) (*Location, error)
+	CreateChatRead(chatRead *ChatRead) error
+	ReadChatRead(chatID, userID int) (*ChatRead, error)
+	UpdateChatRead(chatRead *ChatRead) error
+	DeleteChatRead(chatID, userID int) error
 }
 
 type manager struct {
@@ -66,6 +54,10 @@ type manager struct {
 var Manager ManagerModel
 
 func init() {
+	config.MysqlUsername = os.Getenv("MYSQL_USER")
+	config.MysqlPassword = os.Getenv("MYSQL_PASSWORD")
+	config.MysqlDatabase = os.Getenv("MYSQL_DATABASE")
+
 	db, err := sql.Open("mysql",
 		fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 			config.MysqlUsername,

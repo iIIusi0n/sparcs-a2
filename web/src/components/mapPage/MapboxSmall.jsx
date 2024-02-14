@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import ReactMapGL from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import mapMarkerIcon from "../icons/marker.svg";
 
 function MapboxSmall() {
   const [markers, setMarkers] = useState([
@@ -14,30 +16,29 @@ function MapboxSmall() {
       container: "map",
       style: "mapbox://styles/mapbox/streets-v11",
       center: [127.3845475, 36.3504119], // 초기 위치 (경도, 위도)
+      attributionControl: false,
       zoom: 14, // 초기 줌 레벨
     });
 
     markers.forEach((marker) => {
       const el = document.createElement("div");
       el.className = "marker";
-      el.style.color = marker.color;
+      el.style.backgroundColor = marker.color;
+      el.style.backgroundImage = "url(${mapMarkerIcon})";
+      el.style.width = "20px";
+      el.style.height = "20px";
+
       new mapboxgl.Marker(el)
         .setLngLat([marker.longtitude, marker.latitude])
+        .setDraggable(false)
         .addTo(map);
     });
-
-    /* const marker = new mapboxgl.Marker({
-      color: "#FF0000", // 마커 색상
-      draggable: false, // 사용자가 마커를 드래그할 수 있는지 여부
-    })
-      .setLngLat([127.3845475, 36.3504119]) // 마커의 위치 (경도, 위도)
-      .addTo(map); */
     return () => {
       map.remove();
     }; // 컴포넌트가 언마운트될 때 맵을 제거합니다.
   }, []);
 
-  return <div id="map" style={{ width: "100%", height: "1200px" }} />;
+  return <div id="map" style={{ width: "100vw", height: "100vh" }} />;
 }
 
 export default MapboxSmall;

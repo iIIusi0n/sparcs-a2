@@ -1,6 +1,6 @@
 import React from "react";
 import MediaQuery from "react-responsive";
-import addIcon from "../components/icons/add.png";
+import addIcon from "../icons/add.png";
 
 const AddPin = () => {
   return (

@@ -1,15 +1,17 @@
 package data
 
 type User struct {
-	ID             int    `json:"id"`
-	Username       string `json:"username"`
-	Name           string `json:"name"`
-	ProfilePicture string `json:"profile_picture"`
-	CreatedAt      string `json:"created_at"`
+	ID          int    `json:"id"`
+	Username    string `json:"username"`
+	RealName    string `json:"real_name"`
+	Email       string `json:"email"`
+	PhoneNumber string `json:"phone_number"`
+	CreatedAt   string `json:"created_at"`
 }
 
 func (m *manager) CreateUser(user *User) (int, error) {
-	result, err := m.db.Exec("INSERT INTO users (username, name, profile_picture) VALUES (?, ?, ?)", user.Username, user.Name, user.ProfilePicture)
+	query := "INSERT INTO users (username, real_name, email, phone_number) VALUES (?, ?, ?, ?)"
+	result, err := m.db.Exec(query, user.Username, user.RealName, user.Email, user.PhoneNumber)
 	if err != nil {
 		return 0, err
 	}
@@ -23,23 +25,34 @@ func (m *manager) CreateUser(user *User) (int, error) {
 }
 
 func (m *manager) ReadUser(id int) (*User, error) {
-	row := m.db.QueryRow("SELECT * FROM users WHERE id = ?", id)
+	query := "SELECT * FROM users WHERE id = ?"
+	row := m.db.QueryRow(query, id)
 
-	var u User
-	err := row.Scan(&u.ID, &u.Username, &u.Name, &u.ProfilePicture, &u.CreatedAt)
+	user := User{}
+	err := row.Scan(&user.ID, &user.Username, &user.RealName, &user.Email, &user.PhoneNumber, &user.CreatedAt)
 	if err != nil {
 		return nil, err
 	}
 
-	return &u, nil
+	return &user, nil
 }
 
 func (m *manager) UpdateUser(user *User) error {
-	_, err := m.db.Exec("UPDATE users SET username = ?, name = ?, profile_picture = ? WHERE id = ?", user.Username, user.Name, user.ProfilePicture, user.ID)
-	return err
+	query := "UPDATE users SET username = ?, real_name = ?, email = ?, phone_number = ? WHERE id = ?"
+	_, err := m.db.Exec(query, user.Username, user.RealName, user.Email, user.PhoneNumber, user.ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (m *manager) DeleteUser(id int) error {
-	_, err := m.db.Exec("DELETE FROM users WHERE id = ?", id)
-	return err
+	query := "DELETE FROM users WHERE id = ?"
+	_, err := m.db.Exec(query, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
