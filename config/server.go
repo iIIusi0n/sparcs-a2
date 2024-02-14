@@ -9,6 +9,7 @@ var (
 
 	ServerSecret = "" // TODO: Change this to a more secure secret
 
-	ServerLog = "server.log"
-	GinLog    = "gin.log"
+	ServerLogToFile = true
+	ServerLog       = "server.log"
+	GinLog          = "gin.log"
 )
