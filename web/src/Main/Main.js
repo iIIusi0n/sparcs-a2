@@ -7,7 +7,11 @@ import Title from "./components/title";
 import AddPin from "../components/AddPin.jsx";
 import PinMarker from "../components/PinMarker.jsx";
 import ScrollBar from "../components/ScrollBar.jsx";
+import ScrollBarBig from "../components/ScrollBarBig.jsx";
 import Marker from "../components/Marker.jsx";
+import Button from "../components/Button.jsx";
+import ButtonBig from "../components/ButtonBig.jsx";
+import PinComponent from "../components/PinComponent.jsx";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,6 +31,8 @@ const Main = (props) => {
             <PinMarker></PinMarker>
             <ScrollBar></ScrollBar>
             <Marker></Marker>
+            <Button></Button>
+            <PinComponent></PinComponent>
             <NavigationBar></NavigationBar>
           </Container>
         </div>
@@ -40,6 +46,9 @@ const Main = (props) => {
             <Title></Title>
             <AddPin></AddPin>
             <PinMarker></PinMarker>
+            <ScrollBarBig></ScrollBarBig>
+            <Marker></Marker>
+            <ButtonBig></ButtonBig>
             <NavigationBar></NavigationBar>
           </Container>
         </div>

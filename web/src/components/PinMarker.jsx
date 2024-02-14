@@ -8,7 +8,7 @@ const AddPin = () => {
     <div>
       <MediaQuery maxWidth={430}>
         {/* 아이폰 화면 크기에 맞는 스타일 */}
-        <div style={{ position: "absolute", left: "30px", top: "250px" }}>
+        <div style={{ position: "absolute", left: "30px", top: "210px" }}>
           <button
             style={{
               background: "white",
@@ -23,7 +23,7 @@ const AddPin = () => {
       <MediaQuery minWidth={431}>
         {/* 아이폰 화면 크기보다 큰 화면에 대한 스타일 */}
         <div>
-          <div style={{ position: "absolute", left: "245px", top: "105px" }}>
+          <div style={{ position: "absolute", left: "235px", top: "105px" }}>
             <button
               style={{
                 background: "white",
@@ -33,7 +33,7 @@ const AddPin = () => {
               <img
                 src={pinMarkerIconBig}
                 alt="Pin Marker Icon Big"
-                style={{ width: "auto", height: "10px" }}
+                style={{ width: "auto", height: "15px" }}
               />
             </button>
           </div>

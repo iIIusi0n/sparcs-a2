@@ -1,7 +1,7 @@
 import React from "react";
 import url from "./icons/Rectangle.png";
 
-const Container = ({
+const ComponentsPin = ({
   value = url,
   location = "동구",
   date = " 2023년 12월 ",

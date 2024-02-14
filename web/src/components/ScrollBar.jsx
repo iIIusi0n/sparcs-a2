@@ -20,12 +20,22 @@ const ScrollBar = ({ newValue, newLocation, newDate }) => {
             width: "100%",
             overflowX: "auto",
             position: "relative",
-            top: "260px",
+            top: "240px",
+            left: "10px",
           }}
         >
           <div style={{ display: "flex" }}>
             {items.map((item, index) => (
-              <Container value={item}></Container>
+              <button
+                style={{
+                  border: "white",
+                  marginColor: "white",
+                  background: "white",
+                  height: "220px",
+                }}
+              >
+                <Container value={item}></Container>
+              </button>
             ))}
           </div>
         </div>

@@ -7,7 +7,7 @@ const AddPin = () => {
     <div>
       <MediaQuery maxWidth={430}>
         {/* 아이폰 화면 크기에 맞는 스타일 */}
-        <div style={{ position: "absolute", left: "340px", top: "140px" }}>
+        <div style={{ position: "absolute", left: "355px", top: "110px" }}>
           <img src={addIcon} alt="Add Icon" />
         </div>
       </MediaQuery>

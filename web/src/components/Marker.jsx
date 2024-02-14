@@ -11,7 +11,7 @@ const Marker = () => {
           style={{
             position: "absolute",
             left: "25px",
-            top: "540px",
+            top: "520px",
             display: "flex",
           }}
         >
@@ -34,6 +34,33 @@ const Marker = () => {
 
       <MediaQuery minWidth={431}>
         {/* 아이폰 화면 크기보다 큰 화면에 대한 스타일 */}
+        <div
+          style={{
+            position: "absolute",
+            left: "245px",
+            top: "360px",
+            display: "flex",
+          }}
+        >
+          <img
+            src={markerIcon}
+            alt="Marker Icon"
+            style={{ width: "auto", height: "15px" }}
+          />
+          <p
+            style={{
+              position: "relative",
+              top: "1px",
+              left: "7px",
+              fontWeight: "bold",
+              margin: "0px",
+              border: "0px",
+              fontSize: "10px",
+            }}
+          >
+            지금 떠오르는 PIN
+          </p>
+        </div>
       </MediaQuery>
     </div>
   );

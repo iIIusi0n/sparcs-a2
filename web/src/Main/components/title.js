@@ -8,7 +8,7 @@ const Title = (props) => {
       <MediaQuery maxWidth={430}>
         {/* 아이폰 화면 크기에 맞는 스타일 */}
         <div>
-          <div style={{ position: "absolute", top: "80px", left: "40px" }}>
+          <div style={{ position: "absolute", top: "50px", left: "40px" }}>
             <div>
               <p style={{ fontWeight: "bold", fontSize: "20px" }}>
                 {props.name}님,

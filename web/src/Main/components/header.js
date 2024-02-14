@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaMapMarker } from "react-icons/fa";
+import profileIcon from "../icons/profile.png";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import MediaQuery from "react-responsive";
@@ -23,8 +24,8 @@ const Header = () => {
       <MediaQuery maxWidth={430}>
         {/* 아이폰 화면 크기에 맞는 스타일 */}
         <div style={{ display: "flex" }}>
-          <avatar style={{ position: "relative", top: "15px", left: "10px" }}>
-            <FaMapMarker size={30} color="FF772A" />
+          <avatar style={{ position: "relative", top: "17px", left: "10px" }}>
+            <img src={profileIcon} alt="Profile Icon" />
           </avatar>
           <select
             onChange={handleChange}
@@ -45,7 +46,7 @@ const Header = () => {
             <option value={map_index[3]}>{map_index[3]}</option>
             <option value={map_index[4]}>{map_index[4]}</option>
           </select>
-          <search style={{ position: "absolute", top: "15px", right: "45px" }}>
+          <search style={{ position: "absolute", top: "15px", right: "32px" }}>
             <button
               style={{
                 background: "white",
@@ -53,14 +54,14 @@ const Header = () => {
                 margin: "0px",
               }}
             >
-              <FaSearch size={30} color="FF772A" />
+              <FaSearch size={25} color="FF772A" />
             </button>
           </search>
           <alert
             style={{
               position: "absolute",
               top: "15px",
-              right: "10px",
+              right: "0px",
             }}
           >
             <button
@@ -70,7 +71,7 @@ const Header = () => {
                 margin: "0px",
               }}
             >
-              <HiOutlineBellAlert size={30} color="FF772A" />
+              <HiOutlineBellAlert size={25} color="FF772A" />
             </button>
           </alert>
         </div>
@@ -79,7 +80,11 @@ const Header = () => {
         {/* 아이폰 화면 크기보다 큰 화면에 대한 스타일 */}
         <div style={{ display: "flex" }}>
           <avatar style={{ position: "relative", top: "15px", left: "230px" }}>
-            <FaMapMarker size={15} color="FF772A" />
+            <img
+              src={profileIcon}
+              alt="Profile Icon"
+              style={{ width: "13px", height: "auto" }}
+            />
           </avatar>
           <select
             onChange={handleChange}
