@@ -6,6 +6,8 @@ type Hospital struct {
 	Latitude       float64 `json:"latitude"`
 	Longitude      float64 `json:"longitude"`
 	NumberOfDoctor int     `json:"number_of_doctor"`
+	Address        string  `json:"address"`
+	PhoneNumber    string  `json:"phone_number"`
 	CreatedAt      string  `json:"created_at"`
 }
 
