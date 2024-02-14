@@ -54,6 +54,7 @@ CREATE TABLE chats
     sender_id INT NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
     FOREIGN KEY (room_id) REFERENCES chat_rooms (id),
     FOREIGN KEY (sender_id) REFERENCES users (id)
 );
