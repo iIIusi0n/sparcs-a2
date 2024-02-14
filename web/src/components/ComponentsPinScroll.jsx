@@ -1,58 +1,57 @@
 import React from "react";
-import url from "./icons/Rectangle.png";
+import walkIcon from "./icons/walk.png";
+import heartIcon from "./icons/heart.png";
 
-const ComponentsPin = ({
-  value = url,
-  location = "동구",
-  date = " 2023년 12월 ",
+const ComponentsPinScroll = ({
+  value,
+  location = "장소 이름이 들어갑니다",
+  locationAccount = "장소에 대한 설명이 이 자리에 들어갑니다",
+  heart = "22",
+  walk = "22",
 }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        marginRight: "10px",
-      }}
-    >
+    <div style={{ position: "relative", left: "15px", top: "360px" }}>
       <div
         style={{
+          width: "130px",
+          height: "100px",
           borderRadius: "10px",
+          backgroundColor: "#A3A5A8",
           overflow: "hidden",
-          position: "relative",
+          position: "absolute",
         }}
       >
         <img src={value} alt="이미지" />
-        <div
-          style={{
-            position: "absolute",
-            top: "7px",
-            left: "7px",
-            padding: "2px",
-            color: "white",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            borderRadius: "5px",
-            fontSize: "10px",
-          }}
-        >
+      </div>
+      <div style={{ position: "absolute", left: "150px" }}>
+        <p style={{ fontSize: "18px", color: "#FF772A", fontWeight: "bold" }}>
           {location}
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            top: "200px",
-            left: "70px",
-            padding: "2px",
-            color: "white",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            borderRadius: "5px",
-            fontSize: "10px",
-          }}
-        >
-          {date}
-        </div>
+        </p>
+      </div>
+      <div style={{ position: "absolute", left: "150px", top: "25px" }}>
+        <p style={{ fontSize: "14px", fontWeight: "bold" }}>
+          {locationAccount}
+        </p>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: "155px",
+          top: "70px",
+          display: "flex",
+        }}
+      >
+        <img src={heartIcon} alt="Heart Icon" style={{ marginRight: "5px" }} />
+        <p style={{ fontSize: "12px", margin: "0px" }}>{heart}</p>
+        <img
+          src={walkIcon}
+          alt="Walk Icon"
+          style={{ marginLeft: "30px", marginRight: "5px" }}
+        />
+        <p style={{ fontSize: "12px", margin: "0px" }}>{walk}</p>
       </div>
     </div>
   );
 };
 
-export default Container;
+export default ComponentsPinScroll;

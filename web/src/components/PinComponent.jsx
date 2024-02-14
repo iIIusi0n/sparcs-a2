@@ -1,24 +1,23 @@
 import React from "react";
-import Container from "./Container";
-import url from "./icons/Rectangle.png";
+import { useState } from "react";
+import { useEffect } from "react";
 import MediaQuery from "react-responsive";
+import ComponentsPinScroll from "./ComponentsPinScroll";
 
-const PinComponent = ({
-  value = url,
-  location = "동구",
-  date = " 2023년 12월 ",
-}) => {
+const PinComponent = (props) => {
+  const { value, location, locationAccount, heart, walk } = props;
   return (
     <div>
       <MediaQuery maxWidth={430}>
-        <div
-          style={{
-            position: "relative",
-            left: "100px",
-            top: "350px",
-            width: "100px",
-          }}
-        ></div>
+        <div>
+          <ComponentsPinScroll
+            value={value}
+            location={location}
+            locationAccount={locationAccount}
+            heart={heart}
+            walk={walk}
+          ></ComponentsPinScroll>
+        </div>
       </MediaQuery>
       <MediaQuery maxWidth={431}>
         <div></div>
