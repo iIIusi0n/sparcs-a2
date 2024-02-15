@@ -11,3 +11,6 @@ restart:
 	docker-compose down
 	docker-compose build
 	docker-compose --env-file .env.test.local up -d
+
+test api:
+	go run api-server/cmd/api-server-test
