@@ -1,46 +1,79 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import menuIcon from "../icons/menu.svg";
+import backwardIcon from "../icons/backward.svg";
+import { useNavigate } from "react-router-dom";
+import MessageList from "./MessageList";
+import MessageForm from "./MessageForm";
 
-const header = () => {
+const ChatroonHeader = () => {
+  const navigate = useNavigate();
+  const handleClickToChatRoom = () => {
+    navigate("/message");
+  };
   return (
     <div>
-      {/* 아이폰 화면 크기에 맞는 스타일 */}
       <div style={{ display: "flex", position: "relative" }}>
-        <search style={{ position: "absolute", top: "10px", right: "15%" }}>
-          <button
-            style={{
-              background: "white",
-              border: "white",
-              margin: "0px",
-            }}
-          >
-            <FaSearch size={25} color="FF772A" />
-          </button>
-        </search>
-        <alert
+        <button
           style={{
+            background: "white",
+            border: "white",
+            margin: "0px",
             position: "absolute",
-            top: "50%",
+            left: "5%",
+            top: "20px",
+          }}
+          onClick={handleClickToChatRoom}
+        >
+          <img src={backwardIcon} alt="Backward Icon" />
+        </button>
+        <p
+          style={{
+            fontSize: "12px",
+            position: "absolute",
+            left: "15%",
+            top: "15px",
+            fontWeight: "bold",
+          }}
+        >
+          대전광역시 유성구 전체
+        </p>
+        <button
+          style={{
+            background: "white",
+            border: "white",
+            margin: "0px",
+            position: "absolute",
+            right: "14%",
+            top: "20px",
+          }}
+        >
+          <FaSearch size={25} color="FF772A" />
+        </button>
+        <button
+          style={{
+            background: "white",
+            border: "white",
+            margin: "0px",
+            position: "absolute",
+            top: "17px",
             right: "5%",
           }}
         >
-          <button
-            style={{
-              background: "white",
-              border: "white",
-              margin: "0px",
-              position: "absolute",
-              top: "8px",
-              right: "10%",
-            }}
-          >
-            <img src={menuIcon} alt="Profile Icon" />
-          </button>
-        </alert>
+          <img src={menuIcon} alt="Menu Icon" />
+        </button>
+        <div
+          style={{
+            borderTop: "1px solid #A3A5A8",
+            position: "absolute",
+            top: "70px",
+            width: "100%",
+          }}
+        ></div>
       </div>
     </div>
   );
 };
 
-export default header;
+export default ChatroonHeader;
