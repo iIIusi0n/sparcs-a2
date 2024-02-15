@@ -50,6 +50,8 @@ type ManagerModel interface {
 	ReadChatRead(chatID, userID int) (*ChatRead, error)
 	UpdateChatRead(chatRead *ChatRead) error
 	DeleteChatRead(chatID, userID int) error
+
+	DropAllData() error
 }
 
 type manager struct {
@@ -78,4 +80,38 @@ func init() {
 	}
 
 	Manager = &manager{db: db}
+}
+
+func (m *manager) DropAllData() error {
+	var err error
+
+	_, err = m.db.Exec("DELETE FROM in_hospitals")
+	if err != nil {
+		return err
+	}
+	_, err = m.db.Exec("DELETE FROM waiting_numbers")
+	if err != nil {
+		return err
+	}
+	_, err = m.db.Exec("DELETE FROM chat_read")
+	if err != nil {
+		return err
+	}
+	_, err = m.db.Exec("DELETE FROM chats")
+	if err != nil {
+		return err
+	}
+	_, err = m.db.Exec("DELETE FROM chat_rooms")
+	if err != nil {
+		return err
+	}
+	_, err = m.db.Exec("DELETE FROM users")
+	if err != nil {
+		return err
+	}
+	_, err = m.db.Exec("DELETE FROM hospitals")
+	if err != nil {
+		return err
+	}
+	return nil
 }

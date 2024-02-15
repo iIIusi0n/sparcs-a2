@@ -144,6 +144,17 @@ func main() {
 
 	log.Println("Passed tests:", PassedTests)
 	log.Println("Failed tests:", FailedTests)
+
+	test := ApiTest{
+		Name:           "Drop all data",
+		Method:         "GET",
+		URL:            ServerURL + "/api/v1/debug/dropalldata",
+		ExpectedStatus: 200,
+	}
+	status, body := RunTest(test)
+	if status != 200 {
+		panic("Failed to drop all data: " + body)
+	}
 }
 
 func CreateTokenForDebug() {

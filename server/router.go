@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	cChat "api-server/controllers/chat"
+	cData "api-server/controllers/data"
 	cHospital "api-server/controllers/hospital"
 	cImage "api-server/controllers/image"
 	cUser "api-server/controllers/user"
@@ -22,6 +23,7 @@ func NewRouter() *gin.Engine {
 				debug := v1.Group("/debug")
 				{
 					debug.POST("/token", cUser.TemporaryTokenRouter)
+					debug.GET("/dropalldata", cData.DropAllDataRouter)
 				}
 			}
 
