@@ -12,19 +12,8 @@ import Button from "../components/pins/Button.jsx";
 import ButtonBig from "../components/pins/ButtonBig.jsx";
 import PinComponent from "../components/pins/PinComponent.jsx";
 import hospitalIcon from "../components/icons/hospital.svg";
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 10px;
-`;
 
 const Main = () => {
-  const [valueFromChild, setValueFromChild] = useState("");
-
-  const handleChildValueChange = (newValue) => {
-    setValueFromChild(newValue);
-  };
-
   return (
     <div>
       <div
@@ -36,10 +25,7 @@ const Main = () => {
           paddingRight: "5%",
         }}
       >
-        <Header
-          valueFromParent={valueFromChild}
-          onChildValueChange={handleChildValueChange}
-        ></Header>
+        <Header></Header>
         <Title></Title>
         <Logo></Logo>
         <button
@@ -68,7 +54,13 @@ const Main = () => {
           }}
         >
           <img src={hospitalIcon} alt="Hospital Icon" />
-          <p style={{ fontWeight: "bold", fontSize: "20px" }}>유성구</p>
+          <p style={{ fontWeight: "bold", fontSize: "20px", color: "#FF772A" }}>
+            유성구
+          </p>
+          <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+            {" "}
+            내 다른 소아과
+          </p>
         </div>
         <Button></Button>
         <PinComponent></PinComponent>

@@ -1,11 +1,11 @@
 import React from "react";
 import homeIcon from "../icons/Frame 14(1).svg";
-import pinIcon from "../icons/map.svg";
-import messageIcon from "../icons/ellipsis.bubble.png";
+import pinIcon from "../icons/map (2).svg";
+import messageIcon from "../icons/chat.svg";
 import profileIcon from "../icons/c.png";
 import { useNavigate } from "react-router-dom";
 
-const NavigationBarMap = () => {
+const NavigationBarChat = () => {
   const navigate = useNavigate();
   const handleClickToMap = () => {
     // 버튼을 클릭하면 '/about' 경로로 이동
@@ -19,6 +19,7 @@ const NavigationBarMap = () => {
     // 버튼을 클릭하면 '/about' 경로로 이동
     navigate("/message");
   };
+
   return (
     <div
       style={{
@@ -97,8 +98,7 @@ const NavigationBarMap = () => {
               fontFamily: "Pretendard",
               position: "relative",
               margin: "0",
-              left: "8px",
-              color: "#FF772A",
+              left: "10px",
             }}
           >
             PIN
@@ -128,8 +128,9 @@ const NavigationBarMap = () => {
               fontSize: "14px",
               fontFamily: "Pretendard",
               position: "relative",
-              left: "6px",
+              left: "2px",
               margin: "0",
+              color: "#FF772A",
             }}
           >
             채팅
@@ -172,4 +173,4 @@ const NavigationBarMap = () => {
   );
 };
 
-export default NavigationBarMap;
+export default NavigationBarChat;
