@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-const ServerURL = "https://localhost"
+const ServerURL = "https://blops.me"
 
 var Token string
 
@@ -155,6 +155,8 @@ func main() {
 	if status != 200 {
 		panic("Failed to drop all data: " + body)
 	}
+
+	log.Println("All tests passed")
 }
 
 func CreateTokenForDebug() {
