@@ -13,9 +13,8 @@ import writeButtonIcon from "../icons/writebutton.svg";
 import hospitalIcon from "../icons/hospital.svg";
 import { useNavigate } from "react-router-dom";
 import SelectedCase from "./SelectedCase";
-import UnSelectedCase from "./UnSelectedCase";
 
-function MapboxSmall(props) {
+function UnSelectedCase(props) {
   const { name, location, etc, watingNum, watingTime, distance, image } = props;
   const [markers, setMarkers] = useState([
     { longitude: 127.3845475, latitude: 36.3505119, number: 22 },
@@ -106,13 +105,46 @@ function MapboxSmall(props) {
 
   return (
     <div>
-      {selectedMarker && <SelectedCase></SelectedCase>}
-      {!selectedMarker && <UnSelectedCase></UnSelectedCase>}
+      <div id="map" style={{ width: "100vw", height: "100vh" }}></div>
+      <div>
+        <div style={{ position: "relative" }}>
+          <button
+            style={{
+              backgroundColor: "transparent",
+              position: "fixed",
+              top: "680px",
+              left: "10px",
+              margin: "0px",
+              padding: "0px",
+              border: "0px",
+            }}
+          >
+            <img src={currentButtonIcon} alt="Current Button Icon" />
+          </button>
+          <button
+            style={{
+              backgroundColor: "transparent",
+              position: "fixed",
+              top: "680px",
+              right: "5px",
+              margin: "0px",
+              padding: "0px",
+              border: "0px",
+            }}
+          >
+            <img
+              src={writeButtonIcon}
+              alt="Write Button Icon"
+              style={{ width: "72px" }}
+            />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
-MapboxSmall.defaultProps = {
+UnSelectedCase.defaultProps = {
   name: "꿈나무소아청소년과의원",
   location: "대전과역시 유성구 전민동 엑스포로 꿈나무소아청소년과의원",
   etc: "#전문의벼원 #주말진료 ",
@@ -121,4 +153,4 @@ MapboxSmall.defaultProps = {
   distance: 300,
 };
 
-export default MapboxSmall;
+export default UnSelectedCase;
