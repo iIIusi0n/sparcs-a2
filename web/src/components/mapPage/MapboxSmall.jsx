@@ -111,7 +111,7 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "52%",
+                top: "51%",
                 left: "2%",
                 margin: "0px",
                 padding: "0px",
@@ -124,8 +124,8 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "51%",
-                right: "17%",
+                top: "50%",
+                right: "4%",
                 margin: "0px",
                 padding: "0px",
                 border: "0px",
@@ -144,7 +144,7 @@ function MapboxSmall(props) {
               width: "100vw",
               height: "250px",
               position: "absolute",
-              bottom: "35px",
+              bottom: "130px",
             }}
           >
             <div
@@ -168,9 +168,12 @@ function MapboxSmall(props) {
                   top: "25px",
                   left: "260px",
                   position: "absolute",
+                  fontSize: "13px",
+                  color: "white",
+                  justifyContent: "center",
                 }}
               >
-                <p style={{ color: "white" }}>getMarkerText(props.watingNum)</p>
+                {getMarkerText(props.watingNum)}
               </div>
             </div>
             <div

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/header/header.jsx";
 import NavigationBar from "../components/navigation/NavigationBar.jsx";
-import MediaQuery from "react-responsive";
 import Title from "../components/recommandMarker/title.jsx";
-import AddPin from "../components/recommandMarker/AddPin.jsx";
+import Logo from "../components/recommandMarker/logo.jsx";
 import PinMarker from "../components/addWating/PinMarker.jsx";
 import ScrollBar from "../components/ScrollBar.jsx";
 import ScrollBarBig from "../components/ScrollBarBig.jsx";
@@ -12,47 +11,68 @@ import Marker from "../components/recommandMarker/Marker.jsx";
 import Button from "../components/pins/Button.jsx";
 import ButtonBig from "../components/pins/ButtonBig.jsx";
 import PinComponent from "../components/pins/PinComponent.jsx";
+import hospitalIcon from "../components/icons/hospital.svg";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 10px;
 `;
 
-const Main = (props) => {
+const Main = () => {
+  const [valueFromChild, setValueFromChild] = useState("");
+
+  const handleChildValueChange = (newValue) => {
+    setValueFromChild(newValue);
+  };
+
   return (
     <div>
-      <MediaQuery maxWidth={430}>
-        {/* 아이폰 화면 크기에 맞는 스타일 */}
-        <div>
-          <Container>
-            <Header></Header>
-            <Title></Title>
-            <AddPin></AddPin>
-            <PinMarker></PinMarker>
-            <ScrollBar></ScrollBar>
-            <Marker></Marker>
-            <Button></Button>
-            <PinComponent></PinComponent>
-            <NavigationBar></NavigationBar>
-          </Container>
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          paddingLeft: "5%",
+          paddingRight: "5%",
+        }}
+      >
+        <Header
+          valueFromParent={valueFromChild}
+          onChildValueChange={handleChildValueChange}
+        ></Header>
+        <Title></Title>
+        <Logo></Logo>
+        <button
+          style={{
+            backgroundColor: "#FF772A",
+            borderRadius: "30px",
+            width: "80vw",
+            left: "10%",
+            height: "5vh",
+            position: "absolute",
+            top: "230px",
+            border: "none",
+          }}
+        >
+          <p style={{ color: "white", fontWeight: "bold" }}>
+            + 내 대기번호 추가
+          </p>
+        </button>
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+            padding: "0px",
+            top: "1000%",
+            left: "8%",
+          }}
+        >
+          <img src={hospitalIcon} alt="Hospital Icon" />
+          <p style={{ fontWeight: "bold", fontSize: "20px" }}>유성구</p>
         </div>
-      </MediaQuery>
-
-      <MediaQuery minWidth={431}>
-        {/* 아이폰 화면 크기보다 큰 화면에 대한 스타일 */}
-        <div>
-          <Container>
-            <Header></Header>
-            <Title></Title>
-            <AddPin></AddPin>
-            <PinMarker></PinMarker>
-            <ScrollBarBig></ScrollBarBig>
-            <Marker></Marker>
-            <ButtonBig></ButtonBig>
-            <NavigationBar></NavigationBar>
-          </Container>
-        </div>
-      </MediaQuery>
+        <Button></Button>
+        <PinComponent></PinComponent>
+      </div>
     </div>
   );
 };
