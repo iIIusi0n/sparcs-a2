@@ -13,7 +13,7 @@ import writeButtonIcon from "../icons/writebutton.svg";
 import hospitalIcon from "../icons/hospital.svg";
 
 function MapboxSmall(props) {
-  const { name, location, etc, watingNum, watingTime, distance } = props;
+  const { name, location, etc, watingNum, watingTime, distance, image } = props;
   const [markers, setMarkers] = useState([
     { longitude: 127.3845475, latitude: 36.3505119, number: 22 },
     { longitude: 127.3822485, latitude: 36.3482102, number: 2 },
@@ -36,12 +36,9 @@ function MapboxSmall(props) {
       );
     }
     if (selectedMarker) {
-      selectedMarker.getElement().style.backgroundImage = getSelectMarkerColor(
-        selectedMarker.number
-      );
+      selectedMarker.getElement().style.backgroundImage = `url(${selectMarkerIcon_orange})`;
     }
   }, [selectedMarker]);
-
 
   useEffect(() => {
     mapboxgl.accessToken =
@@ -85,23 +82,22 @@ function MapboxSmall(props) {
     }
   };
 
-  const getSelectMarkerColor = (number) => {
-    if (number <= 10) {
-      return `url(${selectMarkerIcon_green})`;
-    } else if (number <= 20) {
-      return `url(${selectMarkerIcon_orange})`;
-    } else {
-      return `url(${selectMarkerIcon_red})`;
-    }
-  };
-
   const getMarkerColor1 = (watingNum) => {
     if (watingNum <= 10) {
       return "green";
     } else if (watingNum <= 20) {
       return "orange";
     } else {
-      return "blue";
+      return "red";
+    }
+  };
+  const getMarkerText = (watingNum) => {
+    if (watingNum <= 10) {
+      return "여유";
+    } else if (watingNum <= 20) {
+      return "보통";
+    } else {
+      return "혼잡";
     }
   };
 
@@ -115,8 +111,8 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "550px",
-                left: "10px",
+                top: "52%",
+                left: "2%",
                 margin: "0px",
                 padding: "0px",
                 border: "0px",
@@ -128,8 +124,8 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "543px",
-                right: "5px",
+                top: "51%",
+                right: "17%",
                 margin: "0px",
                 padding: "0px",
                 border: "0px",
@@ -146,8 +142,9 @@ function MapboxSmall(props) {
             style={{
               backgroundColor: "white",
               width: "100vw",
+              height: "250px",
               position: "absolute",
-              bottom: "120px",
+              bottom: "35px",
             }}
           >
             <div
@@ -163,12 +160,98 @@ function MapboxSmall(props) {
                 {props.name}
               </p>
               <div
-                style={{ backgroundColor: getMarkerColor1(props.watingNum) }}
-              ></div>
+                style={{
+                  backgroundColor: getMarkerColor1(props.watingNum),
+                  width: "7vw",
+                  height: "4vw",
+                  borderRadius: "5px",
+                  top: "25px",
+                  left: "260px",
+                  position: "absolute",
+                }}
+              >
+                <p style={{ color: "white" }}>getMarkerText(props.watingNum)</p>
+              </div>
             </div>
-            <p>Longitude: {selectedMarker.longitude}</p>
-            <p>Latitude: {selectedMarker.latitude}</p>
-            <p>Number: {selectedMarker.number}</p>
+            <div
+              style={{
+                width: "90px",
+                height: "90px",
+                borderRadius: "10px",
+                backgroundColor: "#A3A5A8",
+                overflow: "hidden",
+                position: "absolute",
+                left: "20px",
+                top: "60px",
+                margin: "0px",
+                padding: "0px",
+              }}
+            >
+              <img src={props.image} alt="이미지" />
+            </div>
+            <div style={{ display: "flex" }}>
+              <p
+                style={{
+                  color: "#FF772A",
+                  top: "50px",
+                  left: "120px",
+                  position: "absolute",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                }}
+              >
+                주소
+              </p>
+              <p
+                style={{
+                  left: "120px",
+                  position: "absolute",
+                  fontSize: "14px",
+                }}
+              >
+                {props.location}
+              </p>
+            </div>
+            <div style={{ display: "flex" }}>
+              <p
+                style={{
+                  color: "#FF772A",
+                  top: "110px",
+                  left: "120px",
+                  position: "absolute",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                }}
+              >
+                기타
+              </p>
+              <p
+                style={{
+                  top: "130px",
+                  left: "120px",
+                  position: "absolute",
+                  fontSize: "14px",
+                }}
+              >
+                {props.etc}
+              </p>
+            </div>
+            <button
+              style={{
+                backgroundColor: "#FF772A",
+                borderRadius: "10px",
+                width: "80vw",
+                left: "10%",
+                height: "5vh",
+                position: "absolute",
+                top: "180px",
+                border: "none",
+              }}
+            >
+              <p style={{ color: "white", fontWeight: "bold" }}>
+                내 병원으로 등록하기
+              </p>
+            </button>
           </div>
         </div>
       )}
@@ -215,7 +298,7 @@ function MapboxSmall(props) {
 MapboxSmall.defaultProps = {
   name: "꿈나무소아청소년과의원",
   location: "대전과역시 유성구 전민동 엑스포로 꿈나무소아청소년과의원",
-  etc: "#전문의벼원 #주말진료",
+  etc: "#전문의벼원 #주말진료 ",
   watingNum: 30,
   watingTime: "1시간 30분",
   distance: 300,
