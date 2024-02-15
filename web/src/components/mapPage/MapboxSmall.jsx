@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import ReactMapGL from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -13,10 +13,31 @@ import hospitalIcon from "../icons/hospital.svg";
 function MapboxSmall(props) {
   const { name, location, etc, watingNum, watingTime, distance } = props;
   const [markers, setMarkers] = useState([
-    { longitude: 127.3845475, latitude: 36.3504119, number: 22 },
+    { longitude: 127.3845475, latitude: 36.3505119, number: 22 },
+    { longitude: 127.3822485, latitude: 36.3482102, number: 2 },
   ]);
 
-  const [selectedMarker, setSelectedMarker] = useState(false);
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const prevMarker = usePrevious(selectedMarker);
+  useEffect(() => {
+    if (prevMarker) {
+      prevMarker.getElement().style.backgroundImage = getMarkerColor(
+        prevMarker.number
+      );
+    }
+    if (selectedMarker) {
+      selectedMarker.getElement().style.backgroundImage = `url(${selectMarkerIcon})`;
+    }
+  }, [selectedMarker]);
+
 
   useEffect(() => {
     mapboxgl.accessToken =
@@ -42,12 +63,7 @@ function MapboxSmall(props) {
         .addTo(map);
 
       el.addEventListener("click", () => {
-        if (selectedMarker) {
-          el.style.backgroundImage = getMarkerColor(marker.number);
-        } else {
-          el.style.backgroundImage = `url(${selectMarkerIcon})`;
-        }
-        setSelectedMarker(!selectedMarker);
+        setSelectedMarker(markerObject);
       });
     });
     return () => {
