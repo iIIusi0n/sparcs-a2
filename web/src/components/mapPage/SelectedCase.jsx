@@ -250,6 +250,7 @@ function SelectedCase(props) {
                     position: "absolute",
                     fontWeight: "bold",
                     fontSize: "15px",
+                    fontFamily: "s",
                   }}
                 >
                   주소

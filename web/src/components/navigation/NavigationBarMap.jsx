@@ -1,8 +1,8 @@
 import React from "react";
 import homeIcon from "../icons/Frame 14(1).svg";
 import pinIcon from "../icons/map.svg";
-import messageIcon from "../icons/ellipsis.bubble.png";
-import profileIcon from "../icons/c.png";
+import messageIcon from "../icons/chat(2).svg";
+import profileIcon from "../icons/Frame 15.svg";
 import { useNavigate } from "react-router-dom";
 
 const NavigationBarMap = () => {
@@ -23,7 +23,7 @@ const NavigationBarMap = () => {
     <div
       style={{
         position: "fixed",
-        bottom: "19%",
+        bottom: " 11%",
         width: "100%",
         marign: "0",
       }}
@@ -31,23 +31,19 @@ const NavigationBarMap = () => {
       <div
         style={{
           backgroundColor: "white",
-          position: "absolute",
+          position: "relative",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "15px 10px 10px",
-          paddingBottom: "20px",
+          padding: "2%",
           width: "100%",
           height: "5vh",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "80px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "15%",
           }}
         >
           <button
@@ -62,11 +58,11 @@ const NavigationBarMap = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
               margin: "0",
-              left: "14px",
+              bottom: "0%",
+              left: "35%",
             }}
           >
             홈
@@ -74,11 +70,10 @@ const NavigationBarMap = () => {
         </div>
         <div
           style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "160px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "25%",
           }}
         >
           <button
@@ -93,11 +88,11 @@ const NavigationBarMap = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
               margin: "0",
-              left: "8px",
+              bottom: "0%",
+              left: "25%",
               color: "#FF772A",
             }}
           >
@@ -106,11 +101,10 @@ const NavigationBarMap = () => {
         </div>
         <div
           style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "240px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "35%",
           }}
         >
           <button
@@ -125,11 +119,11 @@ const NavigationBarMap = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
-              left: "6px",
               margin: "0",
+              bottom: "0%",
+              left: "12%",
             }}
           >
             채팅
@@ -138,11 +132,10 @@ const NavigationBarMap = () => {
 
         <div
           style={{
-            position: "absolute",
-            bottom: "22px",
-            left: "320px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "45%",
           }}
         >
           <button
@@ -156,12 +149,11 @@ const NavigationBarMap = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
               margin: "0",
-              top: "4px",
-              left: "2px",
+              bottom: "0%",
+              left: "13%",
             }}
           >
             마이

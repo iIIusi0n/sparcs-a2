@@ -1,10 +1,8 @@
 import React from "react";
-import homeIcon from "../icons/Frame 14.png";
-import pinIcon from "../icons/map.png";
-import messageIcon from "../icons/ellipsis.bubble.png";
-import profileIcon from "../icons/c.png";
-import styled from "styled-components";
-import MediaQuery from "react-responsive";
+import homeIcon from "../icons/Frame 14(2).svg";
+import pinIcon from "../icons/map (2).svg";
+import messageIcon from "../icons/chat(2).svg";
+import profileIcon from "../icons/Frame 15.svg";
 import { useNavigate } from "react-router-dom";
 
 const NavigationBar = () => {
@@ -17,34 +15,35 @@ const NavigationBar = () => {
     // 버튼을 클릭하면 '/about' 경로로 이동
     navigate("/");
   };
+  const handleClickToChat = () => {
+    // 버튼을 클릭하면 '/about' 경로로 이동
+    navigate("/message");
+  };
   return (
     <div
       style={{
         position: "fixed",
-        bottom: "100px",
+        bottom: " 11%",
         width: "100%",
+        marign: "0",
       }}
     >
       <div
         style={{
           backgroundColor: "white",
-          position: "absolute",
+          position: "relative",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "15px 10px 10px",
-          paddingBottom: "40px",
+          padding: "2%",
           width: "100%",
           height: "5vh",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "80px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "15%",
           }}
         >
           <button
@@ -59,11 +58,11 @@ const NavigationBar = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
               margin: "0",
-              left: "14px",
+              bottom: "0%",
+              left: "35%",
               color: "#FF772A",
             }}
           >
@@ -72,11 +71,10 @@ const NavigationBar = () => {
         </div>
         <div
           style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "160px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "25%",
           }}
         >
           <button
@@ -91,11 +89,11 @@ const NavigationBar = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
               margin: "0",
-              left: "8px",
+              bottom: "0%",
+              left: "25%",
             }}
           >
             PIN
@@ -103,11 +101,10 @@ const NavigationBar = () => {
         </div>
         <div
           style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "240px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "35%",
           }}
         >
           <button
@@ -116,29 +113,29 @@ const NavigationBar = () => {
               border: "white",
               margin: "0px",
             }}
+            onClick={handleClickToChat}
           >
             <img src={messageIcon} alt="Message Icon" />
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
-              left: "6px",
               margin: "0",
+              bottom: "0%",
+              left: "12%",
             }}
           >
-            모임
+            채팅
           </p>
         </div>
 
         <div
           style={{
-            position: "absolute",
-            bottom: "22px",
-            left: "320px",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            left: "45%",
           }}
         >
           <button
@@ -152,12 +149,11 @@ const NavigationBar = () => {
           </button>
           <p
             style={{
+              position: "absolute",
               fontSize: "14px",
-              fontFamily: "Pretendard",
-              position: "relative",
               margin: "0",
-              top: "4px",
-              left: "2px",
+              bottom: "0%",
+              left: "13%",
             }}
           >
             마이

@@ -4,16 +4,17 @@ import { FaMapMarker } from "react-icons/fa";
 import profileIcon from "../icons/profile.png";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineBellAlert } from "react-icons/hi2";
+import NavigationBar from "../navigation/NavigationBar";
 import MediaQuery from "react-responsive";
 const Header = () => {
-  const [currentValue, setCurrentValue] = useState("대전광역시 동구");
+  const [currentValue, setCurrentValue] = useState("토리소아청소년과의원");
 
   const map_index = [
-    "대전광역시 서구",
-    "대전광역시 중구",
-    "대전광역시 유성구",
-    "대전광역시 동구",
-    "대전광역시 대덕구",
+    "토리소아청소년과의원",
+    "튼튼소아청소년과의원",
+    "한빛소아청소년과의원",
+    "이지소아청소년과의원",
+    "탄방엠블병원",
   ];
   const handleChange = (event) => {
     setCurrentValue(event.target.value);

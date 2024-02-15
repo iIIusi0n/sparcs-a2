@@ -65,6 +65,7 @@ const Main = () => {
         <Button></Button>
         <PinComponent></PinComponent>
       </div>
+      <NavigationBar></NavigationBar>
     </div>
   );
 };
