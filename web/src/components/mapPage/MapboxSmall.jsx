@@ -86,7 +86,16 @@ function MapboxSmall(props) {
     } else if (watingNum <= 20) {
       return "orange";
     } else {
-      return "blue";
+      return "red";
+    }
+  };
+  const getMarkerText = (watingNum) => {
+    if (watingNum <= 10) {
+      return "여유";
+    } else if (watingNum <= 20) {
+      return "보통";
+    } else {
+      return "혼잡";
     }
   };
 
@@ -100,8 +109,8 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "550px",
-                left: "10px",
+                top: "52%",
+                left: "2%",
                 margin: "0px",
                 padding: "0px",
                 border: "0px",
@@ -113,8 +122,8 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "543px",
-                right: "5px",
+                top: "51%",
+                right: "17%",
                 margin: "0px",
                 padding: "0px",
                 border: "0px",
@@ -131,8 +140,9 @@ function MapboxSmall(props) {
             style={{
               backgroundColor: "white",
               width: "100vw",
+              height: "250px",
               position: "absolute",
-              bottom: "70px",
+              bottom: "35px",
             }}
           >
             <div
@@ -148,8 +158,18 @@ function MapboxSmall(props) {
                 {props.name}
               </p>
               <div
-                style={{ backgroundColor: getMarkerColor1(props.watingNum) }}
-              ></div>
+                style={{
+                  backgroundColor: getMarkerColor1(props.watingNum),
+                  width: "7vw",
+                  height: "4vw",
+                  borderRadius: "5px",
+                  top: "25px",
+                  left: "260px",
+                  position: "absolute",
+                }}
+              >
+                <p style={{ color: "white" }}>getMarkerText(props.watingNum)</p>
+              </div>
             </div>
             <div
               style={{
@@ -180,11 +200,56 @@ function MapboxSmall(props) {
               >
                 주소
               </p>
-              <p>{props.location}</p>
+              <p
+                style={{
+                  left: "120px",
+                  position: "absolute",
+                  fontSize: "14px",
+                }}
+              >
+                {props.location}
+              </p>
             </div>
-            <p>Longitude: {selectedMarker.longitude}</p>
-            <p>Latitude: {selectedMarker.latitude}</p>
-            <p>Number: {selectedMarker.number}</p>
+            <div style={{ display: "flex" }}>
+              <p
+                style={{
+                  color: "#FF772A",
+                  top: "110px",
+                  left: "120px",
+                  position: "absolute",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                }}
+              >
+                기타
+              </p>
+              <p
+                style={{
+                  top: "130px",
+                  left: "120px",
+                  position: "absolute",
+                  fontSize: "14px",
+                }}
+              >
+                {props.etc}
+              </p>
+            </div>
+            <button
+              style={{
+                backgroundColor: "#FF772A",
+                borderRadius: "10px",
+                width: "80vw",
+                left: "10%",
+                height: "5vh",
+                position: "absolute",
+                top: "180px",
+                border: "none",
+              }}
+            >
+              <p style={{ color: "white", fontWeight: "bold" }}>
+                내 병원으로 등록하기
+              </p>
+            </button>
           </div>
         </div>
       )}
@@ -231,7 +296,7 @@ function MapboxSmall(props) {
 MapboxSmall.defaultProps = {
   name: "꿈나무소아청소년과의원",
   location: "대전과역시 유성구 전민동 엑스포로 꿈나무소아청소년과의원",
-  etc: "#전문의벼원 #주말진료",
+  etc: "#전문의벼원 #주말진료 ",
   watingNum: 30,
   watingTime: "1시간 30분",
   distance: 300,
