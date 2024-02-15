@@ -9,7 +9,7 @@ start:
 
 restart:
 	docker-compose down
-	sudo docker rmi $(sudo docker images -f "dangling=true" -q) --force
+	DANGLING_IMAGES=$(sudo docker images -f "dangling=true" -q); sudo docker rmi $$DANGLING_IMAGES --force
 	docker-compose build
 	docker-compose --env-file .env.test.local up -d
 
