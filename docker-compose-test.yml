@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  # MySQL
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_RANDOM_ROOT_PASSWORD}
+      - TZ=${TZ}
+    volumes:
+      - ./assets/mysql:/docker-entrypoint-initdb.d
+
+  # Golang API server
+  api-server:
+    build: .
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - SERVER_DOMAIN=${SERVER_DOMAIN}
+      - SERVER_SECRETE_KEY=${SERVER_SECRETE_KEY}
+      - SERVER_IS_DEV=${SERVER_IS_DEV}
+      - SERVER_LOG_TO_FILE=${SERVER_LOG_TO_FILE}
+    depends_on:
+      - db
+
+  # Caddy reverse proxy
+  caddy:
+    image: caddy
+    volumes:
+      - ./web/build:/usr/share/caddy/assets
+      - ./assets/caddy/Caddyfile:/etc/caddy/Caddyfile
+    environment:
+      API_SERVER_HOST: api-server
+      SERVER_DOMAIN: ${SERVER_DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api-server
