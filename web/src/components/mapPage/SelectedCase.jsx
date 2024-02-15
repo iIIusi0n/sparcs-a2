@@ -118,7 +118,7 @@ function SelectedCase(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "46%",
+                top: "55%",
                 left: "2%",
                 margin: "0px",
                 padding: "0px",
@@ -131,8 +131,8 @@ function SelectedCase(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "45%",
-                right: "4%",
+                top: "54%",
+                right: "2%",
                 margin: "0px",
                 padding: "0px",
                 border: "0px",
@@ -152,7 +152,7 @@ function SelectedCase(props) {
                 width: "100vw",
                 height: "30vh",
                 position: "absolute",
-                bottom: "140px",
+                bottom: "5%",
               }}
             >
               <div style={{ position: "absolute", left: "40%", top: "15%" }}>
@@ -183,7 +183,15 @@ function SelectedCase(props) {
                 }}
                 onClick={toggleRegister}
               >
-                <p style={{ color: "white", fontWeight: "bold" }}>확인</p>
+                <p
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontFamily: "Pretendard-Medium",
+                  }}
+                >
+                  확인
+                </p>
               </button>
             </div>
           )}
@@ -207,7 +215,12 @@ function SelectedCase(props) {
                 }}
               >
                 <img src={hospitalIcon} alt="Hospital Icon" />
-                <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+                <p
+                  style={{
+                    fontSize: "20px",
+                    fontFamily: "Pretendard-Bold",
+                  }}
+                >
                   {props.name}
                 </p>
                 <div
@@ -219,9 +232,9 @@ function SelectedCase(props) {
                     top: "25px",
                     left: "260px",
                     position: "absolute",
-                    fontSize: "13px",
+                    fontSize: "12px",
                     color: "white",
-                    justifyContent: "center",
+                    fontFamily: "pretendatd-Medium",
                   }}
                 >
                   {getMarkerText(props.watingNum)}
@@ -250,9 +263,8 @@ function SelectedCase(props) {
                     top: "13%",
                     left: "120px",
                     position: "absolute",
-                    fontWeight: "bold",
                     fontSize: "15px",
-                    fontFamily: "s",
+                    fontFamily: "pretendard-Bold",
                   }}
                 >
                   주소
@@ -263,6 +275,7 @@ function SelectedCase(props) {
                     position: "absolute",
                     top: "20%",
                     fontSize: "14px",
+                    fontFamily: "pretendard-Medium",
                   }}
                 >
                   {props.location}
@@ -275,8 +288,8 @@ function SelectedCase(props) {
                     top: "35%",
                     left: "120px",
                     position: "absolute",
-                    fontWeight: "bold",
                     fontSize: "15px",
+                    fontFamily: "pretendard-Bold",
                   }}
                 >
                   기타
@@ -287,6 +300,7 @@ function SelectedCase(props) {
                     left: "120px",
                     position: "absolute",
                     fontSize: "14px",
+                    fontFamily: "pretendard-Medium",
                   }}
                 >
                   {props.etc}
