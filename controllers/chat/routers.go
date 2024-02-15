@@ -3,6 +3,7 @@ package chat
 import (
 	"api-server/data"
 	"github.com/gin-gonic/gin"
+	"log"
 	"strconv"
 )
 
@@ -93,10 +94,12 @@ func CreateChatMessageRouter(c *gin.Context) {
 		return
 	}
 	chat.RoomID = idNum
-	chat.SenderID = c.GetInt("id")
+	chat.SenderID = c.GetInt("uid")
 
 	chatID, err := data.Manager.CreateChat(&chat)
 	if err != nil {
+		log.Println(err)
+
 		c.JSON(500, gin.H{"error": "Failed to create chat message"})
 		return
 	}

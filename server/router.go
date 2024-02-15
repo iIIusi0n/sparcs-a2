@@ -69,9 +69,9 @@ func NewRouter() *gin.Engine {
 
 				chat.POST("/room", cChat.CreateChatRoomRouter)
 
-				chat.GET("/message/:room_id", cChat.GetChatMessagesRouter)
+				chat.GET("/:room_id", cChat.GetChatMessagesRouter)
 
-				chat.POST("/message/:room_id", cChat.CreateChatMessageRouter)
+				chat.POST("/:room_id", cChat.CreateChatMessageRouter)
 			}
 		}
 	}

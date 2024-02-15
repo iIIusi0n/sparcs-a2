@@ -140,6 +140,7 @@ func main() {
 
 	TestUserRouter()
 	TestHospitalRouter()
+	TestChatRouter()
 
 	log.Println("Passed tests:", PassedTests)
 	log.Println("Failed tests:", FailedTests)
@@ -335,6 +336,58 @@ func TestHospitalRouter() {
 			Name:           "Get hospital waiting number",
 			Method:         "GET",
 			URL:            ServerURL + "/api/v1/hospital/1/waiting",
+			ExpectedStatus: 200,
+		},
+	}
+
+	RunTests(tests)
+}
+
+func TestChatRouter() {
+	newChatRoom := ChatRoom{
+		Name: "Test Room",
+	}
+
+	newChat := Chat{
+		RoomID:   1,
+		SenderID: 1,
+		Content:  "Test Content",
+	}
+
+	bodyData, _ := json.Marshal(newChatRoom)
+	bodyData2, _ := json.Marshal(newChat)
+
+	tests := []ApiTest{
+		{
+			Name:           "Create chat room",
+			Method:         "POST",
+			Body:           string(bodyData),
+			URL:            ServerURL + "/api/v1/chat/room",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get chat rooms",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/chat/room",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get chat room by ID",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/chat/room/1",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Create chat",
+			Method:         "POST",
+			Body:           string(bodyData2),
+			URL:            ServerURL + "/api/v1/chat/1",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get chat by ID",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/chat/1",
 			ExpectedStatus: 200,
 		},
 	}
