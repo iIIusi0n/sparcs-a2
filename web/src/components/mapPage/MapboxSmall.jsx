@@ -11,7 +11,7 @@ import writeButtonIcon from "../icons/writebutton.svg";
 import hospitalIcon from "../icons/hospital.svg";
 
 function MapboxSmall(props) {
-  const { name, location, etc, watingNum, watingTime, distance } = props;
+  const { name, location, etc, watingNum, watingTime, distance, image } = props;
   const [markers, setMarkers] = useState([
     { longitude: 127.3845475, latitude: 36.3504119, number: 22 },
   ]);
@@ -42,6 +42,7 @@ function MapboxSmall(props) {
         .addTo(map);
 
       el.addEventListener("click", () => {
+        console.log(selectedMarker);
         if (selectedMarker) {
           el.style.backgroundImage = getMarkerColor(marker.number);
         } else {
@@ -117,7 +118,7 @@ function MapboxSmall(props) {
               backgroundColor: "white",
               width: "100vw",
               position: "absolute",
-              bottom: "120px",
+              bottom: "70px",
             }}
           >
             <div
@@ -135,6 +136,37 @@ function MapboxSmall(props) {
               <div
                 style={{ backgroundColor: getMarkerColor1(props.watingNum) }}
               ></div>
+            </div>
+            <div
+              style={{
+                width: "90px",
+                height: "90px",
+                borderRadius: "10px",
+                backgroundColor: "#A3A5A8",
+                overflow: "hidden",
+                position: "absolute",
+                left: "20px",
+                top: "60px",
+                margin: "0px",
+                padding: "0px",
+              }}
+            >
+              <img src={props.image} alt="이미지" />
+            </div>
+            <div style={{ display: "flex" }}>
+              <p
+                style={{
+                  color: "#FF772A",
+                  top: "50px",
+                  left: "120px",
+                  position: "absolute",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                }}
+              >
+                주소
+              </p>
+              <p>{props.location}</p>
             </div>
             <p>Longitude: {selectedMarker.longitude}</p>
             <p>Latitude: {selectedMarker.latitude}</p>
