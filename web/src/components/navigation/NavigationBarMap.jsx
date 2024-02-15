@@ -19,7 +19,7 @@ const NavigationBarMap = () => {
     <div
       style={{
         position: "fixed",
-        bottom: "20%",
+        bottom: "0%",
         width: "100%",
         marign: "0",
       }}

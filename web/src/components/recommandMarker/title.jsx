@@ -1,92 +1,83 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import MediaQuery from "react-responsive";
+import React from "react";
+import { useState, useEffect } from "react";
 
 const Title = (props) => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const formattedTime = currentTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return (
     <div>
-      <MediaQuery maxWidth={430}>
-        {/* 아이폰 화면 크기에 맞는 스타일 */}
-        <div>
-          <div style={{ position: "absolute", top: "50px", left: "40px" }}>
-            <div>
-              <p style={{ fontWeight: "bold", fontSize: "20px" }}>
-                {props.name}님,
-              </p>
-              <p style={{ fontWeight: "bold", fontSize: "20px" }}>
-                오늘 방문한 장소를
-              </p>
-              <div style={{ display: "flex", margin: "0px", border: "0px" }}>
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    color: "#FF772A",
-                    margin: "0px",
-                    border: "0px",
-                    fontSize: "20px",
-                  }}
-                >
-                  PIN
-                </p>
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    margin: "0px",
-                    border: "0px",
-                    fontSize: "20px",
-                  }}
-                >
-                  으로 남겨보세요
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </MediaQuery>
-
-      <MediaQuery minWidth={431}>
-        {/* 아이폰 화면 크기보다 큰 화면에 대한 스타일 */}
-        <div>
-          <div style={{ position: "absolute", top: "40px", left: "250px" }}>
-            <div>
-              <p style={{ fontWeight: "bold", fontSize: "8px" }}>
-                {props.name}님,
-              </p>
-              <p style={{ fontWeight: "bold", fontSize: "8px" }}>
-                오늘 방문한 장소를
-              </p>
-              <div
+      {/* 아이폰 화면 크기에 맞는 스타일 */}
+      <div>
+        <div style={{ position: "absolute", top: "50px", left: "40px" }}>
+          <div>
+            <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+              {props.name}님,
+            </p>
+            <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+              예상 대기 시간은
+            </p>
+            <div style={{ display: "flex", margin: "0px", border: "0px" }}>
+              <p
                 style={{
-                  display: "flex",
+                  fontWeight: "bold",
+                  fontSize: "20px",
                   margin: "0px",
                   border: "0px",
-                  fontSize: "8px",
+                  color: "#FF772A",
                 }}
               >
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    color: "#FF772A",
-                    margin: "0px",
-                    border: "0px",
-                  }}
-                >
-                  PIN
-                </p>
-                <p style={{ fontWeight: "bold", margin: "0px", border: "0px" }}>
-                  으로 남겨보세요
-                </p>
-              </div>
+                최소
+              </p>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  color: "#FF772A",
+                  margin: "0px",
+                  border: "0px",
+                  fontSize: "20px",
+                }}
+              >
+                {props.time}
+              </p>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  margin: "0px",
+                  border: "0px",
+                  fontSize: "20px",
+                }}
+              >
+                이예요
+              </p>
             </div>
           </div>
+          <p style={{ fontSize: "12px" }}>
+            {formattedTime}기준 대기번호 {props.number}번
+          </p>
         </div>
-      </MediaQuery>
+      </div>
     </div>
   );
 };
 
 Title.defaultProps = {
   name: "서현",
+  time: "1시간",
+  number: 18,
 };
 
 export default Title;
