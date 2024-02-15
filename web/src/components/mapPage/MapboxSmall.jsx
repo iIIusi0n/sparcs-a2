@@ -5,7 +5,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapMarkerIcon_orange from "../icons/marker.svg";
 import mapMarkerIcon_red from "../icons/red_marker.svg";
 import mapMarkerIcon_green from "../icons/green_marker.svg";
-import selectMarkerIcon from "../icons/selectmarker.svg";
+import selectMarkerIcon_orange from "../icons/selectmarker.svg";
+import selectMarkerIcon_red from "../icons/red_selectmarker.svg";
+import selectMarkerIcon_green from "../icons/green_selectmarker.svg";
 import currentButtonIcon from "../icons/currentbutton.svg";
 import writeButtonIcon from "../icons/writebutton.svg";
 import hospitalIcon from "../icons/hospital.svg";
@@ -34,7 +36,9 @@ function MapboxSmall(props) {
       );
     }
     if (selectedMarker) {
-      selectedMarker.getElement().style.backgroundImage = `url(${selectMarkerIcon})`;
+      selectedMarker.getElement().style.backgroundImage = getSelectMarkerColor(
+        selectedMarker.number
+      );
     }
   }, [selectedMarker]);
 
@@ -78,6 +82,16 @@ function MapboxSmall(props) {
       return `url(${mapMarkerIcon_orange})`;
     } else {
       return `url(${mapMarkerIcon_red})`;
+    }
+  };
+
+  const getSelectMarkerColor = (number) => {
+    if (number <= 10) {
+      return `url(${selectMarkerIcon_green})`;
+    } else if (number <= 20) {
+      return `url(${selectMarkerIcon_orange})`;
+    } else {
+      return `url(${selectMarkerIcon_red})`;
     }
   };
 
