@@ -42,7 +42,7 @@ function MapMain() {
           </div>
           <Search value={searchTerm} onChange={handleSearchChange}></Search>
         </div>
-        <div style={{ position: "absolute", bottom: "50%" }}>
+        <div style={{ position: "absolute" }}>
           <NavigationBarMap></NavigationBarMap>
         </div>
       </div>

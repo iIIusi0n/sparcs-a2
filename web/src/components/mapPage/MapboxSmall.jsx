@@ -111,7 +111,7 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "51%",
+                top: "46%",
                 left: "2%",
                 margin: "0px",
                 padding: "0px",
@@ -124,7 +124,7 @@ function MapboxSmall(props) {
               style={{
                 backgroundColor: "transparent",
                 position: "fixed",
-                top: "50%",
+                top: "45%",
                 right: "4%",
                 margin: "0px",
                 padding: "0px",
@@ -142,9 +142,9 @@ function MapboxSmall(props) {
             style={{
               backgroundColor: "white",
               width: "100vw",
-              height: "250px",
+              height: "30vh",
               position: "absolute",
-              bottom: "130px",
+              bottom: "140px",
             }}
           >
             <div
@@ -185,7 +185,7 @@ function MapboxSmall(props) {
                 overflow: "hidden",
                 position: "absolute",
                 left: "20px",
-                top: "60px",
+                top: "30%",
                 margin: "0px",
                 padding: "0px",
               }}
@@ -196,7 +196,7 @@ function MapboxSmall(props) {
               <p
                 style={{
                   color: "#FF772A",
-                  top: "50px",
+                  top: "13%",
                   left: "120px",
                   position: "absolute",
                   fontWeight: "bold",
@@ -209,6 +209,7 @@ function MapboxSmall(props) {
                 style={{
                   left: "120px",
                   position: "absolute",
+                  top: "20%",
                   fontSize: "14px",
                 }}
               >
@@ -219,7 +220,7 @@ function MapboxSmall(props) {
               <p
                 style={{
                   color: "#FF772A",
-                  top: "110px",
+                  top: "35%",
                   left: "120px",
                   position: "absolute",
                   fontWeight: "bold",
@@ -230,7 +231,7 @@ function MapboxSmall(props) {
               </p>
               <p
                 style={{
-                  top: "130px",
+                  top: "43%",
                   left: "120px",
                   position: "absolute",
                   fontSize: "14px",
@@ -238,6 +239,58 @@ function MapboxSmall(props) {
               >
                 {props.etc}
               </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                backgroundColor: "#FFF5F0",
+                width: "55vw",
+                height: "6vh",
+                position: "absolute",
+                top: "55%",
+                left: "28%",
+                borderRadius: "15px",
+              }}
+            >
+              <div>
+                <p
+                  style={{ margin: "0px", color: "#FF772A", marginLeft: "5px" }}
+                >
+                  대기번호{" "}
+                </p>
+                <p style={{ margin: "0px", position: "absolute", left: "10%" }}>
+                  {props.watingNum}번
+                </p>
+              </div>
+              <div>
+                <p
+                  style={{
+                    margin: "0px",
+                    color: "#FF772A",
+                    marginLeft: "23px",
+                  }}
+                >
+                  대기시간
+                </p>
+                <p style={{ margin: "0px", position: "absolute", left: "35%" }}>
+                  {props.watingTime}
+                </p>
+              </div>
+              <div>
+                <p
+                  style={{
+                    margin: "0px",
+                    color: "#FF772A",
+                    marginLeft: "37px",
+                  }}
+                >
+                  {" "}
+                  거리{" "}
+                </p>
+                <p style={{ margin: "0px", position: "absolute", left: "80%" }}>
+                  {props.distance}m
+                </p>
+              </div>
             </div>
             <button
               style={{
@@ -247,7 +300,7 @@ function MapboxSmall(props) {
                 left: "10%",
                 height: "5vh",
                 position: "absolute",
-                top: "180px",
+                top: "80%",
                 border: "none",
               }}
             >
