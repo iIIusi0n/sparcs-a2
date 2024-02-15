@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import NavigationBar from "../navigation/NavigationBar";
 import iconLogo from "../icons/iconlogo.svg";
-import 
 
 const AddNumberTitle = (props) => {
   return (
@@ -72,32 +71,6 @@ const AddNumberTitle = (props) => {
             실시간으로 대기 현황이 공유됩니다
           </p>
         </div>
-        <div style={{ display: "flex" }}>
-          <input
-            style={{
-              position: "absolute",
-              width: "16vw",
-              height: "5vh",
-              backgroundColor: "#d1d2d3",
-              left: "10%",
-              top: "30%",
-              borderRadius: "15px",
-              border: "none",
-            }}
-          ></input>
-          <p
-            style={{
-              position: "absolute",
-              left: "28%",
-              top: "26%",
-              fontFamily: "pretendard-Bold",
-              fontSize: "40px",
-            }}
-          >
-            번
-          </p>
-        </div>
-
       </div>
       <NavigationBar></NavigationBar>
     </div>

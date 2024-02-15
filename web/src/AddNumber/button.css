@@ -1,0 +1,26 @@
+.active {
+  width: "80vw";
+  height: "7vh";
+  position: "absolute";
+  left: "10%";
+  bottom: "8%";
+  border-radius: "10px";
+  border: "none";
+  color: "white";
+  font-family: "pretendard-Bold";
+  background-color: "#FF772A";
+  font-size: "20px";
+}
+
+.inactive {
+  width: "80vw";
+  height: "7vh";
+  position: "absolute";
+  left: "10%";
+  bottom: "8%";
+  border-radius: "10px";
+  border: "none";
+  color: "white";
+  font-family: "pretendard-Medium";
+  font-size: "20px";
+}
