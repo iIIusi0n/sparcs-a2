@@ -203,7 +203,7 @@ function SelectedCase(props) {
                 height: "20vh",
                 paddingBottom: "30%",
                 position: "absolute",
-                bottom: "12%",
+                bottom: "1%",
               }}
             >
               <div
@@ -323,7 +323,8 @@ function SelectedCase(props) {
                     style={{
                       margin: "0px",
                       color: "#FF772A",
-                      marginLeft: "5px",
+                      marginLeft: "15px",
+                      fontSize: "10px",
                     }}
                   >
                     대기번호{" "}
@@ -332,7 +333,7 @@ function SelectedCase(props) {
                     style={{
                       margin: "0px",
                       position: "absolute",
-                      left: "10%",
+                      left: "5%",
                     }}
                   >
                     {props.watingNum}번
@@ -344,6 +345,7 @@ function SelectedCase(props) {
                       margin: "0px",
                       color: "#FF772A",
                       marginLeft: "23px",
+                      fontSize: "10px",
                     }}
                   >
                     대기시간
@@ -352,7 +354,7 @@ function SelectedCase(props) {
                     style={{
                       margin: "0px",
                       position: "absolute",
-                      left: "35%",
+                      left: "27%",
                     }}
                   >
                     {props.watingTime}
@@ -363,7 +365,8 @@ function SelectedCase(props) {
                     style={{
                       margin: "0px",
                       color: "#FF772A",
-                      marginLeft: "37px",
+                      marginLeft: "45px",
+                      fontSize: "10px",
                     }}
                   >
                     {" "}
@@ -373,7 +376,7 @@ function SelectedCase(props) {
                     style={{
                       margin: "0px",
                       position: "absolute",
-                      left: "80%",
+                      left: "73%",
                     }}
                   >
                     {props.distance}m
