@@ -36,9 +36,7 @@ function MapboxSmall(props) {
       );
     }
     if (selectedMarker) {
-      selectedMarker.getElement().style.backgroundImage = getSelectMarkerColor(
-        selectedMarker.number
-      );
+      selectedMarker.getElement().style.backgroundImage = `url(${selectMarkerIcon_orange})`;
     }
   }, [selectedMarker]);
 
@@ -81,16 +79,6 @@ function MapboxSmall(props) {
       return `url(${mapMarkerIcon_orange})`;
     } else {
       return `url(${mapMarkerIcon_red})`;
-    }
-  };
-
-  const getSelectMarkerColor = (number) => {
-    if (number <= 10) {
-      return `url(${selectMarkerIcon_green})`;
-    } else if (number <= 20) {
-      return `url(${selectMarkerIcon_orange})`;
-    } else {
-      return `url(${selectMarkerIcon_red})`;
     }
   };
 
