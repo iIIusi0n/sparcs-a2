@@ -15,6 +15,41 @@ import { useNavigate } from "react-router-dom";
 import SelectedCase from "./SelectedCase";
 
 function UnSelectedCase(props) {
+  const getLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // 위치 정보를 서버로 전송
+          fetch("/api/location", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ latitude, longitude }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Location sent successfully");
+              } else {
+                console.error("Failed to send location");
+              }
+            })
+            .catch((error) => {
+              console.error("Error sending location:", error);
+            });
+        },
+        function (error) {
+          console.error("Failed to retrieve location:", error);
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
+
   const { name, location, etc, watingNum, watingTime, distance, image } = props;
   const [markers, setMarkers] = useState([
     { longitude: 127.3845475, latitude: 36.3505119, number: 22 },

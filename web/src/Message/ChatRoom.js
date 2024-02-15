@@ -42,8 +42,8 @@ const ChatRoom = (props) => {
             width: "100vw",
             height: "6vh",
             backgroundColor: "#D1D2D3",
-            position: "fixed",
-            top: "74%",
+            position: "absolute",
+            top: "1450%",
           }}
         >
           <img

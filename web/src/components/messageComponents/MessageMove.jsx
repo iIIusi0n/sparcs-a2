@@ -16,7 +16,6 @@ const MessageMove = (props = "bongjune") => {
         width: "80vw",
         height: "10vh",
         marginRight: "10px",
-        backgroundColor: "blue",
         borderRadius: "30px",
       }}
     >

@@ -12,8 +12,14 @@ import Button from "../components/pins/Button.jsx";
 import ButtonBig from "../components/pins/ButtonBig.jsx";
 import PinComponent from "../components/pins/PinComponent.jsx";
 import hospitalIcon from "../components/icons/hospital.svg";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+  const navigate = useNavigate();
+  const handleClickToAddNumber = () => {
+    // 버튼을 클릭하면 '/about' 경로로 이동
+    navigate("/AddNumber");
+  };
   return (
     <div>
       <div
@@ -39,6 +45,7 @@ const Main = () => {
             top: "230px",
             border: "none",
           }}
+          onClick={handleClickToAddNumber}
         >
           <p
             style={{
