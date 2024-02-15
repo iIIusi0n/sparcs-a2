@@ -1,13 +1,11 @@
 import React from "react";
-import homeIcon from "../icons/Frame 14.png";
-import pinIcon from "../icons/map.png";
+import homeIcon from "../icons/Frame 14(1).svg";
+import pinIcon from "../icons/map.svg";
 import messageIcon from "../icons/ellipsis.bubble.png";
 import profileIcon from "../icons/c.png";
-import styled from "styled-components";
-import MediaQuery from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
-const NavigationBar = () => {
+const NavigationBarMap = () => {
   const navigate = useNavigate();
   const handleClickToMap = () => {
     // 버튼을 클릭하면 '/about' 경로로 이동
@@ -21,8 +19,9 @@ const NavigationBar = () => {
     <div
       style={{
         position: "fixed",
-        bottom: "300px",
+        bottom: "400px",
         width: "100%",
+        marign: "0",
       }}
     >
       <div
@@ -64,7 +63,6 @@ const NavigationBar = () => {
               position: "relative",
               margin: "0",
               left: "14px",
-              color: "#FF772A",
             }}
           >
             홈
@@ -96,6 +94,7 @@ const NavigationBar = () => {
               position: "relative",
               margin: "0",
               left: "8px",
+              color: "#FF772A",
             }}
           >
             PIN
@@ -168,4 +167,4 @@ const NavigationBar = () => {
   );
 };
 
-export default NavigationBar;
+export default NavigationBarMap;
