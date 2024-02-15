@@ -1,7 +1,7 @@
 import React from "react";
 import homeIcon from "../icons/Frame 14(1).svg";
 import pinIcon from "../icons/map (2).svg";
-import messageIcon from "../icons/chat.svg";
+import messageIcon from "../icons/chat(2).svg";
 import profileIcon from "../icons/Frame 15.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -124,8 +124,8 @@ const NavigationBarChat = () => {
               position: "absolute",
               fontSize: "14px",
               margin: "0",
-              bottom: "0%",
-              left: "16%",
+              bottom: "-5%",
+              left: "20%",
               color: "#FF772A",
 
               fontFamily: "Pretendard-Bold",

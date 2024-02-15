@@ -1,7 +1,7 @@
 import React from "react";
 import homeIcon from "../icons/Frame 14(2).svg";
 import pinIcon from "../icons/map (2).svg";
-import messageIcon from "../icons/chat(2).svg";
+import messageIcon from "../icons/chat(3).svg";
 import profileIcon from "../icons/Frame 15.svg";
 import { useNavigate } from "react-router-dom";
 
