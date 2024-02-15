@@ -15,7 +15,7 @@ import registerIcon from "../icons/register.svg";
 import { useNavigate } from "react-router-dom";
 
 function SelectedCase(props) {
-  const [register, setRegister] = useState(true);
+  const [register, setRegister] = useState(false);
   const { name, location, etc, watingNum, watingTime, distance, image } = props;
   const [markers, setMarkers] = useState([
     { longitude: 127.3845475, latitude: 36.3505119, number: 22 },
@@ -110,10 +110,10 @@ function SelectedCase(props) {
 
   return (
     <div>
-      <div>
+      <div style={{ position: "relative" }}>
         <div id="map" style={{ width: "100vw", height: "100vh" }}></div>
         <div>
-          <div style={{ position: "relative" }}>
+          <div>
             <button
               style={{
                 backgroundColor: "transparent",
@@ -165,6 +165,7 @@ function SelectedCase(props) {
                   top: "37%",
                   size: "20px",
                   fontWeight: "bold",
+                  fontFamily: "Pretendard-Bold",
                 }}
               >
                 내 병원으로 등록되었어요!
@@ -191,9 +192,10 @@ function SelectedCase(props) {
               style={{
                 backgroundColor: "white",
                 width: "100vw",
-                height: "30vh",
+                height: "20vh",
+                paddingBottom: "30%",
                 position: "absolute",
-                bottom: "140px",
+                bottom: "12%",
               }}
             >
               <div
@@ -313,7 +315,11 @@ function SelectedCase(props) {
                     대기번호{" "}
                   </p>
                   <p
-                    style={{ margin: "0px", position: "absolute", left: "10%" }}
+                    style={{
+                      margin: "0px",
+                      position: "absolute",
+                      left: "10%",
+                    }}
                   >
                     {props.watingNum}번
                   </p>
@@ -329,7 +335,11 @@ function SelectedCase(props) {
                     대기시간
                   </p>
                   <p
-                    style={{ margin: "0px", position: "absolute", left: "35%" }}
+                    style={{
+                      margin: "0px",
+                      position: "absolute",
+                      left: "35%",
+                    }}
                   >
                     {props.watingTime}
                   </p>
@@ -346,7 +356,11 @@ function SelectedCase(props) {
                     거리{" "}
                   </p>
                   <p
-                    style={{ margin: "0px", position: "absolute", left: "80%" }}
+                    style={{
+                      margin: "0px",
+                      position: "absolute",
+                      left: "80%",
+                    }}
                   >
                     {props.distance}m
                   </p>
@@ -371,182 +385,6 @@ function SelectedCase(props) {
               </button>
             </div>
           )}
-          {/* <div
-            style={{
-              backgroundColor: "white",
-              width: "100vw",
-              height: "30vh",
-              position: "absolute",
-              bottom: "140px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                position: "relative",
-                padding: "0px",
-                left: "20px",
-              }}
-            >
-              <img src={hospitalIcon} alt="Hospital Icon" />
-              <p style={{ fontWeight: "bold", fontSize: "20px" }}>
-                {props.name}
-              </p>
-              <div
-                style={{
-                  backgroundColor: getMarkerColor1(props.watingNum),
-                  width: "7vw",
-                  height: "4vw",
-                  borderRadius: "5px",
-                  top: "25px",
-                  left: "260px",
-                  position: "absolute",
-                  fontSize: "13px",
-                  color: "white",
-                  justifyContent: "center",
-                }}
-              >
-                {getMarkerText(props.watingNum)}
-              </div>
-            </div>
-            <div
-              style={{
-                width: "90px",
-                height: "90px",
-                borderRadius: "10px",
-                backgroundColor: "#A3A5A8",
-                overflow: "hidden",
-                position: "absolute",
-                left: "20px",
-                top: "30%",
-                margin: "0px",
-                padding: "0px",
-              }}
-            >
-              <img src={props.image} alt="이미지" />
-            </div>
-            <div style={{ display: "flex" }}>
-              <p
-                style={{
-                  color: "#FF772A",
-                  top: "13%",
-                  left: "120px",
-                  position: "absolute",
-                  fontWeight: "bold",
-                  fontSize: "15px",
-                }}
-              >
-                주소
-              </p>
-              <p
-                style={{
-                  left: "120px",
-                  position: "absolute",
-                  top: "20%",
-                  fontSize: "14px",
-                }}
-              >
-                {props.location}
-              </p>
-            </div>
-            <div style={{ display: "flex" }}>
-              <p
-                style={{
-                  color: "#FF772A",
-                  top: "35%",
-                  left: "120px",
-                  position: "absolute",
-                  fontWeight: "bold",
-                  fontSize: "15px",
-                }}
-              >
-                기타
-              </p>
-              <p
-                style={{
-                  top: "43%",
-                  left: "120px",
-                  position: "absolute",
-                  fontSize: "14px",
-                }}
-              >
-                {props.etc}
-              </p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                backgroundColor: "#FFF5F0",
-                width: "55vw",
-                height: "6vh",
-                position: "absolute",
-                top: "55%",
-                left: "28%",
-                borderRadius: "15px",
-              }}
-            >
-              <div>
-                <p
-                  style={{
-                    margin: "0px",
-                    color: "#FF772A",
-                    marginLeft: "5px",
-                  }}
-                >
-                  대기번호{" "}
-                </p>
-                <p style={{ margin: "0px", position: "absolute", left: "10%" }}>
-                  {props.watingNum}번
-                </p>
-              </div>
-              <div>
-                <p
-                  style={{
-                    margin: "0px",
-                    color: "#FF772A",
-                    marginLeft: "23px",
-                  }}
-                >
-                  대기시간
-                </p>
-                <p style={{ margin: "0px", position: "absolute", left: "35%" }}>
-                  {props.watingTime}
-                </p>
-              </div>
-              <div>
-                <p
-                  style={{
-                    margin: "0px",
-                    color: "#FF772A",
-                    marginLeft: "37px",
-                  }}
-                >
-                  {" "}
-                  거리{" "}
-                </p>
-                <p style={{ margin: "0px", position: "absolute", left: "80%" }}>
-                  {props.distance}m
-                </p>
-              </div>
-            </div>
-            <button
-              style={{
-                backgroundColor: "#FF772A",
-                borderRadius: "10px",
-                width: "80vw",
-                left: "10%",
-                height: "5vh",
-                position: "absolute",
-                top: "80%",
-                border: "none",
-              }}
-              onClick={toggleRegister}
-            >
-              <p style={{ color: "white", fontWeight: "bold" }}>
-                내 병원으로 등록하기
-              </p>
-            </button>
-            </div> */}
         </div>
       </div>
     </div>

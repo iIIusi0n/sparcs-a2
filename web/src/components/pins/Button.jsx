@@ -12,6 +12,7 @@ const Button = () => {
           border: "none",
           borderRadius: "5px",
           left: "0",
+          fontFamily: "Pretendard-Medium",
         }}
       >
         대기 적은 순
@@ -25,6 +26,7 @@ const Button = () => {
           position: "absolute",
           border: "none",
           borderRadius: "5px",
+          fontFamily: "Pretendard-Medium",
         }}
       >
         거리 순
@@ -38,6 +40,7 @@ const Button = () => {
           position: "absolute",
           border: "none",
           borderRadius: "5px",
+          fontFamily: "Pretendard-Medium",
         }}
       >
         북 마크

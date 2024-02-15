@@ -64,6 +64,7 @@ const NavigationBar = () => {
               bottom: "0%",
               left: "35%",
               color: "#FF772A",
+              fontFamily: "Pretendard-Bold",
             }}
           >
             홈
@@ -94,6 +95,7 @@ const NavigationBar = () => {
               margin: "0",
               bottom: "0%",
               left: "25%",
+              fontFamily: "Pretendard-Bold",
             }}
           >
             PIN
@@ -123,7 +125,8 @@ const NavigationBar = () => {
               fontSize: "14px",
               margin: "0",
               bottom: "0%",
-              left: "12%",
+              left: "20%",
+              fontFamily: "Pretendard-Bold",
             }}
           >
             채팅
@@ -153,7 +156,8 @@ const NavigationBar = () => {
               fontSize: "14px",
               margin: "0",
               bottom: "0%",
-              left: "13%",
+              left: "20%",
+              fontFamily: "Pretendard-Bold",
             }}
           >
             마이

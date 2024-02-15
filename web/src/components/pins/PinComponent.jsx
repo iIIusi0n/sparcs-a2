@@ -8,20 +8,15 @@ const PinComponent = (props) => {
   const { value, location, locationAccount, heart, walk } = props;
   return (
     <div>
-      <MediaQuery maxWidth={430}>
-        <div>
-          <ComponentsPinScroll
-            value={value}
-            location={location}
-            locationAccount={locationAccount}
-            heart={heart}
-            walk={walk}
-          ></ComponentsPinScroll>
-        </div>
-      </MediaQuery>
-      <MediaQuery maxWidth={431}>
-        <div></div>
-      </MediaQuery>
+      <div>
+        <ComponentsPinScroll
+          value={value}
+          location={location}
+          locationAccount={locationAccount}
+          heart={heart}
+          walk={walk}
+        ></ComponentsPinScroll>
+      </div>
     </div>
   );
 };

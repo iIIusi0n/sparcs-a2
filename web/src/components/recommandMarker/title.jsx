@@ -24,7 +24,12 @@ const Title = (props) => {
       <div>
         <div style={{ position: "absolute", top: "50px", left: "40px" }}>
           <div>
-            <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+            <p
+              style={{
+                fontWeight: "bold",
+                fontSize: "20px",
+              }}
+            >
               {props.name}님,
             </p>
             <p style={{ fontWeight: "bold", fontSize: "20px" }}>
@@ -65,7 +70,7 @@ const Title = (props) => {
               </p>
             </div>
           </div>
-          <p style={{ fontSize: "12px" }}>
+          <p style={{ fontSize: "12px", fontFamily: "pretendard-Medium" }}>
             {formattedTime}기준 대기번호 {props.number}번
           </p>
         </div>

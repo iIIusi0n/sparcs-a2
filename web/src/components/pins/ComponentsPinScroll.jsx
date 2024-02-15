@@ -26,12 +26,25 @@ const ComponentsPinScroll = ({
         </button>
       </div>
       <div style={{ position: "absolute", left: "150px" }}>
-        <p style={{ fontSize: "18px", color: "#FF772A", fontWeight: "bold" }}>
+        <p
+          style={{
+            fontSize: "18px",
+            color: "#FF772A",
+            fontWeight: "bold",
+            fontFamily: "Pretendard-Bold",
+          }}
+        >
           {location}
         </p>
       </div>
       <div style={{ position: "absolute", left: "150px", top: "25px" }}>
-        <p style={{ fontSize: "14px", fontWeight: "bold" }}>
+        <p
+          style={{
+            fontSize: "14px",
+            fontWeight: "bold",
+            fontFamily: "Pretendard-Bold",
+          }}
+        >
           {locationAccount}
         </p>
       </div>
@@ -44,13 +57,29 @@ const ComponentsPinScroll = ({
         }}
       >
         <img src={heartIcon} alt="Heart Icon" style={{ marginRight: "5px" }} />
-        <p style={{ fontSize: "12px", margin: "0px" }}>{heart}</p>
+        <p
+          style={{
+            fontSize: "12px",
+            margin: "0px",
+            fontFamily: "Pretendard-Medium",
+          }}
+        >
+          {heart}
+        </p>
         <img
           src={walkIcon}
           alt="Walk Icon"
           style={{ marginLeft: "30px", marginRight: "5px" }}
         />
-        <p style={{ fontSize: "12px", margin: "0px" }}>{walk}</p>
+        <p
+          style={{
+            fontSize: "12px",
+            margin: "0px",
+            fontFamily: "Pretendard-Medium",
+          }}
+        >
+          {walk}
+        </p>
       </div>
     </div>
   );

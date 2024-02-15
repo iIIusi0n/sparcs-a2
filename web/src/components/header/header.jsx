@@ -36,6 +36,7 @@ const Header = () => {
             top: "70%",
             left: "13%",
             fontSize: "15px",
+            fontFamily: "Pretendard-Bold",
           }}
           value={currentValue}
         >

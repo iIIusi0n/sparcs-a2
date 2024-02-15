@@ -40,7 +40,13 @@ const Main = () => {
             border: "none",
           }}
         >
-          <p style={{ color: "white", fontWeight: "bold" }}>
+          <p
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontFamily: "Pretendard-Bold",
+            }}
+          >
             + 내 대기번호 추가
           </p>
         </button>
