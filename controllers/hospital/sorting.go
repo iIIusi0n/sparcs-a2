@@ -28,7 +28,7 @@ func sortHospitalsByLeastWaitingTime(hospitals []*data.Hospital) []*data.Hospita
 }
 
 func distance(lat1, lng1, lat2, lng2 float64) float64 {
-	const earthRadius = 6371 // km
+	const earthRadius = 6371 * 1000 // meters
 
 	lat1Rad := lat1 * (3.14159265359 / 180)
 	lng1Rad := lng1 * (3.14159265359 / 180)
