@@ -19,7 +19,7 @@ const NavigationBarMap = () => {
     <div
       style={{
         position: "fixed",
-        bottom: "400px",
+        bottom: "180px",
         width: "100%",
         marign: "0",
       }}
@@ -32,7 +32,7 @@ const NavigationBarMap = () => {
           alignItems: "center",
           justifyContent: "center",
           padding: "15px 10px 10px",
-          paddingBottom: "40px",
+          paddingBottom: "20px",
           width: "100%",
           height: "5vh",
         }}

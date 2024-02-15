@@ -41,8 +41,9 @@ function MapMain() {
             />
           </div>
           <Search value={searchTerm} onChange={handleSearchChange}></Search>
-          <button
+          {/* <button
             style={{
+              backgroundColor: "transparent",
               position: "relative",
               top: "630px",
               left: "-390px",
@@ -55,6 +56,7 @@ function MapMain() {
           </button>
           <button
             style={{
+              backgroundColor: "transparent",
               position: "relative",
               top: "630px",
               left: "-90px",
@@ -68,12 +70,9 @@ function MapMain() {
               alt="Write Button Icon"
               style={{ width: "72" }}
             />
-          </button>
+          </button> */}
         </div>
         <div style={{ position: "absolute", bottom: "50%" }}>
-          <NavigationBarMap></NavigationBarMap>
-        </div>
-        <div>
           <NavigationBarMap></NavigationBarMap>
         </div>
       </div>
