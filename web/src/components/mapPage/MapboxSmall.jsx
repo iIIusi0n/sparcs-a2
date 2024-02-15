@@ -16,7 +16,7 @@ function MapboxSmall(props) {
     { longitude: 127.3845475, latitude: 36.3504119, number: 22 },
   ]);
 
-  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(false);
 
   useEffect(() => {
     mapboxgl.accessToken =
@@ -42,8 +42,12 @@ function MapboxSmall(props) {
         .addTo(map);
 
       el.addEventListener("click", () => {
-        el.style.backgroundImage = `url(${selectMarkerIcon})`;
-        handleMarkerClick(marker);
+        if (selectedMarker) {
+          el.style.backgroundImage = getMarkerColor(marker.number);
+        } else {
+          el.style.backgroundImage = `url(${selectMarkerIcon})`;
+        }
+        setSelectedMarker(!selectedMarker);
       });
     });
     return () => {
@@ -61,9 +65,14 @@ function MapboxSmall(props) {
     }
   };
 
-  const handleMarkerClick = (marker) => {
-    setSelectedMarker(marker);
-    // 여기에서 클릭한 마커에 대한 추가 작업을 수행할 수 있습니다.
+  const getMarkerColor1 = (watingNum) => {
+    if (watingNum <= 10) {
+      return "green";
+    } else if (watingNum <= 20) {
+      return "orange";
+    } else {
+      return "blue";
+    }
   };
 
   return (
@@ -123,6 +132,9 @@ function MapboxSmall(props) {
               <p style={{ fontWeight: "bold", fontSize: "20px" }}>
                 {props.name}
               </p>
+              <div
+                style={{ backgroundColor: getMarkerColor1(props.watingNum) }}
+              ></div>
             </div>
             <p>Longitude: {selectedMarker.longitude}</p>
             <p>Latitude: {selectedMarker.latitude}</p>
