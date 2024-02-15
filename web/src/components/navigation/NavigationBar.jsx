@@ -21,7 +21,7 @@ const NavigationBar = () => {
     <div
       style={{
         position: "fixed",
-        bottom: "300px",
+        bottom: "100px",
         width: "100%",
       }}
     >
