@@ -25,8 +25,8 @@ type WaitingNumber struct {
 }
 
 func (m *manager) CreateHospital(hospital *Hospital) (int, error) {
-	query := "INSERT INTO hospitals (name, latitude, longitude, number_of_doctor) VALUES (?, ?, ?, ?)"
-	result, err := m.db.Exec(query, hospital.Name, hospital.Latitude, hospital.Longitude, hospital.NumberOfDoctor)
+	query := "INSERT INTO hospitals (name, latitude, longitude, number_of_doctor, address, phone_number) VALUES (?, ?, ?, ?, ?, ?)"
+	result, err := m.db.Exec(query, hospital.Name, hospital.Latitude, hospital.Longitude, hospital.NumberOfDoctor, hospital.Address, hospital.PhoneNumber)
 	if err != nil {
 		return 0, err
 	}
@@ -44,7 +44,7 @@ func (m *manager) ReadHospital(id int) (*Hospital, error) {
 	row := m.db.QueryRow(query, id)
 
 	hospital := Hospital{}
-	err := row.Scan(&hospital.ID, &hospital.Name, &hospital.Latitude, &hospital.Longitude, &hospital.NumberOfDoctor, &hospital.CreatedAt)
+	err := row.Scan(&hospital.ID, &hospital.Name, &hospital.Latitude, &hospital.Longitude, &hospital.NumberOfDoctor, &hospital.Address, &hospital.PhoneNumber, &hospital.CreatedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (m *manager) ReadHospitals() ([]*Hospital, error) {
 	hospitals := []*Hospital{}
 	for rows.Next() {
 		hospital := Hospital{}
-		err := rows.Scan(&hospital.ID, &hospital.Name, &hospital.Latitude, &hospital.Longitude, &hospital.NumberOfDoctor, &hospital.CreatedAt)
+		err := rows.Scan(&hospital.ID, &hospital.Name, &hospital.Latitude, &hospital.Longitude, &hospital.NumberOfDoctor, &hospital.Address, &hospital.PhoneNumber, &hospital.CreatedAt)
 		if err != nil {
 			return nil, err
 		}
@@ -75,8 +75,8 @@ func (m *manager) ReadHospitals() ([]*Hospital, error) {
 }
 
 func (m *manager) UpdateHospital(hospital *Hospital) error {
-	query := "UPDATE hospitals SET name = ?, latitude = ?, longitude = ?, number_of_doctor = ? WHERE id = ?"
-	_, err := m.db.Exec(query, hospital.Name, hospital.Latitude, hospital.Longitude, hospital.NumberOfDoctor, hospital.ID)
+	query := "UPDATE hospitals SET name = ?, latitude = ?, longitude = ?, number_of_doctor = ?, address = ?, phone_number = ? WHERE id = ?"
+	_, err := m.db.Exec(query, hospital.Name, hospital.Latitude, hospital.Longitude, hospital.NumberOfDoctor, hospital.Address, hospital.PhoneNumber, hospital.ID)
 	if err != nil {
 		return err
 	}

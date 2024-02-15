@@ -7,13 +7,95 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
-	"strconv"
 	"strings"
 )
 
 const ServerURL = "https://localhost"
 
 var Token string
+
+type ApiTest struct {
+	Name           string
+	Method         string
+	Body           string
+	URL            string
+	ExpectedStatus int
+}
+
+type User struct {
+	ID          int    `json:"id"`
+	Username    string `json:"username"`
+	RealName    string `json:"real_name"`
+	Email       string `json:"email"`
+	PhoneNumber string `json:"phone_number"`
+	CreatedAt   string `json:"created_at"`
+}
+
+type Hospital struct {
+	ID             int     `json:"id"`
+	Name           string  `json:"name"`
+	Latitude       float64 `json:"latitude"`
+	Longitude      float64 `json:"longitude"`
+	NumberOfDoctor int     `json:"number_of_doctor"`
+	Address        string  `json:"address"`
+	PhoneNumber    string  `json:"phone_number"`
+	CreatedAt      string  `json:"created_at"`
+}
+
+type InHospital struct {
+	HospitalID int    `json:"hospital_id"`
+	UserID     int    `json:"user_id"`
+	CreatedAt  string `json:"created_at"`
+}
+
+type WaitingNumber struct {
+	UserID     int    `json:"user_id"`
+	HospitalID int    `json:"hospital_id"`
+	Number     int    `json:"number"`
+	CreatedAt  string `json:"created_at"`
+}
+
+type ChatRead struct {
+	ChatID    int    `json:"chat_id"`
+	UserID    int    `json:"user_id"`
+	CreatedAt string `json:"created_at"`
+}
+
+type ChatRoom struct {
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	CreatedAt string `json:"created_at"`
+}
+
+type Chat struct {
+	ID        int    `json:"id"`
+	RoomID    int    `json:"room_id"`
+	SenderID  int    `json:"sender_id"`
+	Content   string `json:"content"`
+	CreatedAt string `json:"created_at"`
+}
+
+func RunTest(test ApiTest) (int, string) {
+	return SendRequest(test.Method, test.URL, test.Body)
+}
+
+var (
+	FailedTests = 0
+	PassedTests = 0
+)
+
+func RunTests(tests []ApiTest) {
+	for _, test := range tests {
+		status, body := RunTest(test)
+		if status != test.ExpectedStatus {
+			log.Println("Failed:", test.Name, "status:", status, "body:", body)
+			FailedTests++
+		} else {
+			log.Println("Passed:", test.Name, "status:", status, "body:", body)
+			PassedTests++
+		}
+	}
+}
 
 func RandomString(length int) string {
 	charset := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -57,25 +139,33 @@ func main() {
 	CreateTokenForDebug()
 
 	TestUserRouter()
+	TestHospitalRouter()
+
+	log.Println("Passed tests:", PassedTests)
+	log.Println("Failed tests:", FailedTests)
 }
 
 func CreateTokenForDebug() {
-	url := ServerURL + "/api/v1/debug/token"
+	newUser := User{
+		Username:    RandomString(10),
+		RealName:    "Test User",
+		Email:       RandomString(10) + "@test.com",
+		PhoneNumber: "01012345678",
+	}
+	bodyData, _ := json.Marshal(newUser)
 
-	user := `{
-		"username": "` + RandomString(10) + `",
-		"real_name": "Test User",
-		"email": "",
-		"phone_number": "01012345678"
-}`
-
-	status, body := SendRequest("POST", url, user)
+	test := ApiTest{
+		Name:   "Create token for debug",
+		Method: "POST",
+		Body:   string(bodyData),
+		URL:    ServerURL + "/api/v1/debug/token",
+	}
+	status, body := RunTest(test)
 	if status != 200 {
-		panic("Failed to create token: " + body)
+		panic("Failed to create token for debug: " + body)
 	}
 
 	var response struct {
-		UID   int    `json:"uid"`
 		Token string `json:"token"`
 	}
 	err := json.Unmarshal([]byte(body), &response)
@@ -89,68 +179,165 @@ func CreateTokenForDebug() {
 }
 
 func TestUserRouter() {
-	url := ServerURL + "/api/v1/user/"
-
-	status, body := SendRequest("GET", url, "")
-	if status != 200 {
-		panic("Failed to get user: " + body)
+	newUser := User{
+		Username:    RandomString(10),
+		RealName:    "Test User",
+		Email:       RandomString(10) + "@test.com",
+		PhoneNumber: "01012345678",
 	}
 
-	log.Println("User:", body)
-
-	var response struct {
-		ID          int    `json:"id"`
-		Username    string `json:"username"`
-		RealName    string `json:"real_name"`
-		Email       string `json:"email"`
-		PhoneNumber string `json:"phone_number"`
-		CreatedAt   string `json:"created_at"`
-	}
-	err := json.Unmarshal([]byte(body), &response)
-	if err != nil {
-		panic(err)
+	updatedUser := User{
+		ID:          1,
+		Username:    RandomString(10),
+		RealName:    "Test User",
+		Email:       RandomString(10) + "@test.com",
+		PhoneNumber: "01012345678",
 	}
 
-	url = ServerURL + "/api/v1/user/" + strconv.Itoa(response.ID)
-	status, body = SendRequest("GET", url, "")
-	if status != 200 {
-		panic("Failed to get user: " + body)
+	bodyData, _ := json.Marshal(newUser)
+	bodyData2, _ := json.Marshal(updatedUser)
+
+	tests := []ApiTest{
+		{
+			Name:           "Get logged in user",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/user",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get user by ID",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/user/1",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Create user",
+			Method:         "POST",
+			Body:           string(bodyData),
+			URL:            ServerURL + "/api/v1/user",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Update user",
+			Method:         "PATCH",
+			Body:           string(bodyData2),
+			URL:            ServerURL + "/api/v1/user",
+			ExpectedStatus: 200,
+		},
 	}
 
-	log.Println("User:", body)
+	RunTests(tests)
+}
 
-	url = ServerURL + "/api/v1/user/"
-	response.Email = RandomString(10) + "@updated.com"
-	user, err := json.Marshal(response)
-	if err != nil {
-		panic(err)
+func TestHospitalRouter() {
+	newHospital1 := Hospital{
+		Name:           "Test Hospital",
+		Latitude:       37.123456,
+		Longitude:      127.123456,
+		NumberOfDoctor: 10,
+		Address:        "Test Address",
+		PhoneNumber:    "01012345678",
 	}
 
-	status, body = SendRequest("PATCH", url, string(user))
-	if status != 200 {
-		panic("Failed to update user: " + body)
+	newHospital2 := Hospital{
+		Name:           "Test Hospital 2",
+		Latitude:       37.123473,
+		Longitude:      127.123461,
+		NumberOfDoctor: 10,
+		Address:        "Test Address",
+		PhoneNumber:    "01012345678",
 	}
 
-	log.Println("User updated:", body)
-
-	url = ServerURL + "/api/v1/user/"
-	status, body = SendRequest("GET", url, "")
-	if status != 200 {
-		panic("Failed to get user: " + body)
+	updatedHospital := Hospital{
+		ID:             1,
+		Name:           "Test Hospital",
+		Latitude:       37.123456,
+		Longitude:      127.123456,
+		NumberOfDoctor: 10,
+		Address:        "Updated Address",
+		PhoneNumber:    "01012345678",
 	}
 
-	log.Println("User:", body)
-
-	url = ServerURL + "/api/v1/user/"
-	status, body = SendRequest("POST", url, `{
-		"username": "`+RandomString(10)+`",
-		"real_name": "Test User",
-		"email": "",
-		"phone_number": "01012345678"
-	}`)
-	if status != 200 {
-		panic("Failed to create user: " + body)
+	newWaitingNumber := WaitingNumber{
+		UserID:     1,
+		HospitalID: 1,
+		Number:     13,
 	}
 
-	log.Println("User created:", body)
+	newWaitingNumber2 := WaitingNumber{
+		UserID:     2,
+		HospitalID: 1,
+		Number:     5,
+	}
+
+	bodyData, _ := json.Marshal(newHospital1)
+	bodyData2, _ := json.Marshal(newHospital2)
+	bodyData3, _ := json.Marshal(updatedHospital)
+
+	bodyData4, _ := json.Marshal(newWaitingNumber)
+	bodyData5, _ := json.Marshal(newWaitingNumber2)
+
+	tests := []ApiTest{
+		{
+			Name:           "Create hospital",
+			Method:         "POST",
+			Body:           string(bodyData),
+			URL:            ServerURL + "/api/v1/hospital",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Create hospital",
+			Method:         "POST",
+			Body:           string(bodyData2),
+			URL:            ServerURL + "/api/v1/hospital",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get hospitals",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/hospital",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get hospital by ID",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/hospital/1",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Update hospital",
+			Method:         "PATCH",
+			Body:           string(bodyData3),
+			URL:            ServerURL + "/api/v1/hospital/1",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get updated hospital",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/hospital/1",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Create waiting number",
+			Method:         "POST",
+			Body:           string(bodyData4),
+			URL:            ServerURL + "/api/v1/hospital/1/waiting",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Create waiting number",
+			Method:         "POST",
+			Body:           string(bodyData5),
+			URL:            ServerURL + "/api/v1/hospital/1/waiting",
+			ExpectedStatus: 200,
+		},
+		{
+			Name:           "Get hospital waiting number",
+			Method:         "GET",
+			URL:            ServerURL + "/api/v1/hospital/1/waiting",
+			ExpectedStatus: 200,
+		},
+	}
+
+	RunTests(tests)
 }

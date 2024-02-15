@@ -3,12 +3,15 @@ package hospital
 import (
 	"api-server/data"
 	"github.com/gin-gonic/gin"
+	"log"
 	"strconv"
 )
 
 func GetHospitalsRouter(c *gin.Context) {
 	hospitals, err := data.Manager.ReadHospitals()
 	if err != nil {
+		log.Println(err)
+
 		c.JSON(500, gin.H{"error": "Failed to read hospitals"})
 		return
 	}
@@ -70,6 +73,8 @@ func GetHospitalRouter(c *gin.Context) {
 
 	hospital, err := data.Manager.ReadHospital(hospitalIdNum)
 	if err != nil {
+		log.Println(err)
+
 		c.JSON(500, gin.H{"error": "Failed to read hospital"})
 		return
 	}

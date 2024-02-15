@@ -31,7 +31,7 @@ function MapMain() {
           <img
             src={searchIcon}
             alt="Search Icon"
-            style={{ position: "absolute", width: "23px", left: "13px" }}
+            style={{ position: "absolute", width: "23px", left: "13px", paddingLeft: "3px" }}
           />
         </div>
         <Search value={searchTerm} onChange={handleSearchChange}></Search>
