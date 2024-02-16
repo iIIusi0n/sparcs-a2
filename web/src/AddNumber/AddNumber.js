@@ -16,10 +16,6 @@ const AddNumber = () => {
   const handleInputChange = (event) => {
     setInputValue(event.target.value); // input 값이 변경될 때마다 상태를 업데이트합니다.
   };
-  const getButtonClassName = () => {
-    // 입력 값이 있으면 'active' 클래스를, 없으면 'inactive' 클래스를 반환합니다.
-    return inputValue.trim() !== "" ? "active" : "inactive";
-  };
   // 컴포넌트가 마운트될 때 한 번만 실행되는 useEffect
   useEffect(() => {
     // 서버로부터 아이디를 가져옵니다.
@@ -82,7 +78,23 @@ const AddNumber = () => {
         alt="IconLogoIcon"
         style={{ position: "absolute", bottom: "15%", right: "0" }}
       />
-      <button className={getButtonClassName}>숫자를 입력해주세요</button>
+      <button
+        style={{
+          width: "80vw",
+          height: "7vh",
+          position: "absolute",
+          left: "10%",
+          bottom: "8%",
+          borderRadius: "10px",
+          border: "none",
+          color: "white",
+          fontFamily: "pretendard-Bold",
+          backgroundColor: "#FF772A",
+          fontSize: "20px",
+        }}
+      >
+        숫자를 입력해주세요
+      </button>
     </div>
   );
 };
