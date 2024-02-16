@@ -7,13 +7,17 @@ import { HiOutlineBellAlert } from "react-icons/hi2";
 import NavigationBar from "../navigation/NavigationBar";
 import MediaQuery from "react-responsive";
 const Header = () => {
-  const [currentValue, setCurrentValue] = useState("토리소아청소년과의원");
+  const [currentValue, setCurrentValue] = useState("우리아이소아과");
+
+  if (localStorage.getItem("hospital") !== null) {
+    setCurrentValue(localStorage.getItem("hospital"));
+  }
 
   const map_index = [
-    "토리소아청소년과의원",
-    "튼튼소아청소년과의원",
-    "한빛소아청소년과의원",
-    "이지소아청소년과의원",
+    "우리아이소아과",
+    "조이소아과",
+    "한밭에소아청소년과의원",
+    "바른소아청소년과의원",
     "탄방엠블병원",
   ];
   const handleChange = (event) => {

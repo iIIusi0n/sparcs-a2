@@ -73,6 +73,8 @@ const MessageMain = (props) => {
         </div>
       </div>
       <NavigationBarChat></NavigationBarChat>
+      <NavigationBarChat></NavigationBarChat>
+      <NavigationBarChat></NavigationBarChat>
     </div>
   );
 };

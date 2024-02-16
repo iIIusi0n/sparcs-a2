@@ -20,9 +20,12 @@ function SelectedCase(props) {
   const [markers, setMarkers] = useState([
     { longitude: 127.3845475, latitude: 36.3505119, number: 22 },
     { longitude: 127.3822485, latitude: 36.3482102, number: 2 },
+    { longitude: 127.3813485, latitude: 36.3493102, number: 13 },
+    { longitude: 127.3843485, latitude: 36.3433102, number: 13 },
   ]);
 
   const toggleRegister = () => {
+    localStorage.setItem("hospital", props.name);
     setRegister((prevState) => !prevState);
   };
 

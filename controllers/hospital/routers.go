@@ -60,6 +60,7 @@ func GetHospitalsRouter(c *gin.Context) {
 		}
 	}
 
+	log.Println(hospitals[0].Name)
 	c.JSON(200, hospitals)
 }
 

@@ -14,6 +14,20 @@ const ChatRoom = (props) => {
     fetchMessages();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setMessages(prevMessages => [...prevMessages, { sender: "준빈맘", text: "혹시 지금 우리아이병원에 사람 많은가요?"}])
+    }, 8000);
+
+    setTimeout(() => {
+      setMessages(prevMessages => [...prevMessages, { sender: "둔동마더", text: "30분 전쯤에 나왔는데 오늘 김선생님 진료 안하신다네요 ㅠ"}])
+    }, 14400);
+
+    setTimeout(() => {
+      setMessages(prevMessages => [...prevMessages, { sender: "지현", text: "헐.. 오늘은 대기 좀 있겠네요.."}])
+    }, 17200);
+  }, []);
+
   const fetchMessages = async () => {
     try {
       const response = await axios.get("/api/messages");
@@ -25,7 +39,9 @@ const ChatRoom = (props) => {
 
   const sendMessage = async () => {
     try {
-      await axios.post("/api/messages", { text: newMessage });
+      setMessages(prevMessages => [...prevMessages, { text: newMessage}])
+
+      await axios.post("/api/messages", { sender: "나", text: newMessage });
       setNewMessage("");
       fetchMessages();
     } catch (error) {
@@ -80,7 +96,7 @@ const ChatRoom = (props) => {
         </div>
         <div>
           {messages.map((message, index) => (
-            <div key={index}>{message.text}</div>
+            <div key={index}>{message.sender}: {message.text}</div>
           ))}
         </div>
       </div>
