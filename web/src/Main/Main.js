@@ -32,7 +32,7 @@ const Main = () => {
         }}
       >
         <Header></Header>
-        <Title></Title>
+        <Title name={"기범"}></Title>
         <Logo></Logo>
         <button
           style={{
@@ -77,6 +77,9 @@ const Main = () => {
         </div>
         <Button></Button>
         <PinComponent></PinComponent>
+        <PinComponent></PinComponent>
+        <PinComponent></PinComponent>
+        <PinComponent></PinComponent>
       </div>
       <NavigationBar></NavigationBar>
     </div>
@@ -84,7 +87,7 @@ const Main = () => {
 };
 
 Main.defaultProps = {
-  name: "서현",
+  name: "기범",
 };
 
 export default Main;

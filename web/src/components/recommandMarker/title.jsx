@@ -80,8 +80,8 @@ const Title = (props) => {
 };
 
 Title.defaultProps = {
-  name: "서현",
-  time: "1시간",
+  name: "기범",
+  time: "45분",
   number: 18,
 };
 
