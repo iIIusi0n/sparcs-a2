@@ -16,15 +16,27 @@ const ChatRoom = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setMessages(prevMessages => [...prevMessages, { sender: "준빈맘", text: "혹시 지금 우리아이병원에 사람 많은가요?"}])
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "준빈맘", text: "혹시 지금 우리아이병원에 사람 많은가요?" },
+      ]);
     }, 8000);
 
     setTimeout(() => {
-      setMessages(prevMessages => [...prevMessages, { sender: "둔동마더", text: "30분 전쯤에 나왔는데 오늘 김선생님 진료 안하신다네요 ㅠ"}])
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          sender: "둔동마더",
+          text: "30분 전쯤에 나왔는데 오늘 김선생님 진료 안하신다네요 ㅠ",
+        },
+      ]);
     }, 14400);
 
     setTimeout(() => {
-      setMessages(prevMessages => [...prevMessages, { sender: "지현", text: "헐.. 오늘은 대기 좀 있겠네요.."}])
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "지현", text: "헐.. 오늘은 대기 좀 있겠네요.." },
+      ]);
     }, 17200);
   }, []);
 
@@ -39,7 +51,7 @@ const ChatRoom = (props) => {
 
   const sendMessage = async () => {
     try {
-      setMessages(prevMessages => [...prevMessages, { text: newMessage}])
+      setMessages((prevMessages) => [...prevMessages, { text: newMessage }]);
 
       await axios.post("/api/messages", { sender: "나", text: newMessage });
       setNewMessage("");
@@ -58,8 +70,8 @@ const ChatRoom = (props) => {
             width: "100vw",
             height: "6vh",
             backgroundColor: "#D1D2D3",
-            position: "absolute",
-            top: "1450%",
+            position: "fixed",
+            top: "85%",
           }}
         >
           <img
@@ -96,7 +108,9 @@ const ChatRoom = (props) => {
         </div>
         <div>
           {messages.map((message, index) => (
-            <div key={index}>{message.sender}: {message.text}</div>
+            <div key={index}>
+              {message.sender}: {message.text}
+            </div>
           ))}
         </div>
       </div>
