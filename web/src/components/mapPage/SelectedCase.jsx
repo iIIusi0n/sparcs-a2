@@ -25,7 +25,6 @@ function SelectedCase(props) {
   ]);
 
   const toggleRegister = () => {
-    localStorage.setItem("hospital", props.name);
     setRegister((prevState) => !prevState);
   };
 
