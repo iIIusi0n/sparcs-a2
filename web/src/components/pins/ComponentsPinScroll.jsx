@@ -10,7 +10,12 @@ const ComponentsPinScroll = ({
   walk = "22",
 }) => {
   return (
-    <div style={{ position: "relative", left: "15px", top: "360px" }}>
+    <div
+      style={{
+        width: "100vw",
+        position: "relative",
+      }}
+    >
       <div
         style={{
           width: "130px",
@@ -25,7 +30,7 @@ const ComponentsPinScroll = ({
           <img src={value} alt="이미지" />
         </button>
       </div>
-      <div style={{ position: "absolute", left: "150px", top: "-10px" }}>
+      <div style={{ position: "absolute", left: "37%", top: "70%" }}>
         <p
           style={{
             fontSize: "18px",
@@ -37,7 +42,13 @@ const ComponentsPinScroll = ({
           {location}
         </p>
       </div>
-      <div style={{ position: "absolute", left: "150px", top: "15px" }}>
+      <div
+        style={{
+          position: "absolute",
+          left: "37%",
+          bottom: "-70px",
+        }}
+      >
         <p
           style={{
             fontSize: "14px",
@@ -51,7 +62,7 @@ const ComponentsPinScroll = ({
       <div
         style={{
           position: "absolute",
-          left: "155px",
+          left: "37%",
           top: "70px",
           display: "flex",
         }}
